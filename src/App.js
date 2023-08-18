@@ -6,6 +6,10 @@ import { useState } from "react";
 import { LoginPage } from "./views/LoginPage";
 import HomePage from "./views/HomePage";
 import Navbar from "./components/Navbar";
+import Matriculas from "./views/MatriculasD";
+import Ranking from "./views/Ranking";
+import MeuPerfil from "./views/MeuPerfil";
+import MinhaCasa from "./views/MinhaCasa";
 
 function App() {
   const [message, setMessage] = useState();
@@ -38,6 +42,10 @@ function App() {
         {loggedIn ? (
           <>
             <Route path="/home" element={<HomePage />} />
+            <Route path="/matriculas-disponiveis" element={<Matriculas />} />
+            <Route path="/ranking" element={<Ranking />} />
+            <Route path="/meu-perfil" element={<MeuPerfil />} />
+            <Route path="/minha-casa" element={<MinhaCasa />} />
           </>
         ) : (
           <>
