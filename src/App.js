@@ -5,9 +5,10 @@ import { useState } from "react";
 
 import { LoginPage } from "./views/LoginPage";
 import HomePage from "./views/HomePage";
+import Navbar from "./components/Navbar";
 
 function App() {
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState();
   const [loading, setLoading] = useState(true);
 
   let location = useLocation().pathname;
@@ -15,7 +16,9 @@ function App() {
 
   const navigate = useNavigate();
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const userId = sessionStorage.getItem("token");
+  const [loggedIn, setLoggedIn] = useState(!!userId);
+
   console.log(loggedIn);
   const handleLogin = (username) => {
     // Aqui você pode realizar a autenticação adequada e definir o estado loggedIn
@@ -29,22 +32,27 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App d-flex justify-content-start flex-column">
+      {loggedIn ? <Navbar /> : null}
       <Routes>
         {loggedIn ? (
-          <Route path="/home" element={<HomePage />} />
+          <>
+            <Route path="/home" element={<HomePage />} />
+          </>
         ) : (
-          <Route
-            path="/login"
-            element={
-              <LoginPage
-                handleLogin={handleLogin}
-                handleSignup={handleSignup}
-                message={message}
-                setMessage={setMessage}
-              />
-            }
-          />
+          <>
+            <Route
+              path="/login"
+              element={
+                <LoginPage
+                  handleLogin={handleLogin}
+                  handleSignup={handleSignup}
+                  message={message}
+                  setMessage={setMessage}
+                />
+              }
+            />
+          </>
         )}
       </Routes>
     </div>
