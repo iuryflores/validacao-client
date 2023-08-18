@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import api from "../utils/api.utils.js";
-import { useNavigate } from "react-router-dom";
 
 export const LoginPage = ({
   handleLogin,
@@ -14,8 +13,6 @@ export const LoginPage = ({
   const [password, setPassword] = useState("");
 
   const [error, setError] = useState(null);
-
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,7 +59,6 @@ export const LoginPage = ({
 
   useEffect(() => {
     setTimeout(() => {
-      setMessage(null);
       setError(null);
     }, 8000);
   }, [message, setMessage]);
@@ -71,12 +67,12 @@ export const LoginPage = ({
     <div className="container d-flex justify-content-center align-items-center vh-100">
       <div className="col-md-12 login-container">
         <div className="d-flex flex-column align-items-center w-100 mt-3">
-          {message !== null && (
+          {message && (
             <div className="alert alert-success d-flex flex-column align-items-center w-100">
               {message}
             </div>
           )}
-          {error !== null && (
+          {error && (
             <div className="alert alert-danger d-flex flex-column align-items-center w-100">
               {error}
             </div>
@@ -94,6 +90,7 @@ export const LoginPage = ({
                 className="form-control"
                 placeholder="Usuário"
                 value={newUsername}
+                autoComplete="username"
                 onChange={(e) => setNewUsername(e.target.value)}
               />
             </div>
@@ -106,6 +103,7 @@ export const LoginPage = ({
                 className="form-control"
                 placeholder="Senha"
                 value={newPassword}
+                autoComplete="current-password"
                 onChange={(e) => setNewPassword(e.target.value)}
               />
             </div>
@@ -118,6 +116,7 @@ export const LoginPage = ({
                 className="form-control"
                 placeholder="Confirmar Senha"
                 value={confirmPassword}
+                autoComplete="current-password"
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div>
@@ -165,12 +164,13 @@ export const LoginPage = ({
           </form>
         ) : (
           <form onSubmit={handleSubmit}>
-            <h1>Validação ONRIGO</h1>
+            <h1>ONRIGO</h1>
             <input
               type="text"
               className="form-control mb-3"
               placeholder="Usuário"
               value={username}
+              autoComplete="username"
               onChange={(e) => setUsername(e.target.value)}
             />
             <input
@@ -178,6 +178,7 @@ export const LoginPage = ({
               className="form-control"
               placeholder="Senha"
               value={password}
+              autoComplete="current-password"
               onChange={(e) => setPassword(e.target.value)}
             />
             <div className="mt-3 d-flex flex-column mb-3">

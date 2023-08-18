@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const Navbar = () => {
+const Navbar = ({ onLogout }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark w-100">
       <Link className="navbar-brand px-3" to="/">
-        Validação ONRIGO
+        ONRIGO - Validação
       </Link>
       <button
         className="navbar-toggler"
@@ -22,13 +22,13 @@ const Navbar = () => {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item active">
-            <Link className="nav-link" to="/home">
+            <Link className="nav-link" to="/">
               Home
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/matriculas-disponiveis/">
-              Matrículas disponiveis
+              Matrículas disponíveis
             </Link>
           </li>
           <li className="nav-item">
@@ -47,7 +47,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/sair">
+            <Link className="nav-link" onClick={onLogout} to="/login">
               Sair
             </Link>
           </li>

@@ -10,16 +10,16 @@ import Matriculas from "./views/MatriculasD";
 import Ranking from "./views/Ranking";
 import MeuPerfil from "./views/MeuPerfil";
 import MinhaCasa from "./views/MinhaCasa";
+import Matricula from "./views/Matricula";
 
 function App() {
-  const [message, setMessage] = useState();
-  const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState("");
+  //const [loading, setLoading] = useState(true);
 
   let location = useLocation().pathname;
-  let newLocation = location.slice(0, 6);
-
+  //let newLocation = location.slice(0, 6);
+  console.log(location);
   const navigate = useNavigate();
-
   const userId = sessionStorage.getItem("token");
   const [loggedIn, setLoggedIn] = useState(!!userId);
 
@@ -27,7 +27,7 @@ function App() {
   const handleLogin = (username) => {
     // Aqui você pode realizar a autenticação adequada e definir o estado loggedIn
     setLoggedIn(true);
-    navigate("/home");
+    navigate("/");
   };
   const handleSignup = (username, password, departament, house) => {
     // Aqui você pode adicionar lógica para registrar um novo usuário
@@ -35,20 +35,39 @@ function App() {
     setLoggedIn(false);
   };
 
+  const logout = () => {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("userId");
+    setLoggedIn(false);
+    navigate("/login");
+  };
+
   return (
     <div className="App d-flex justify-content-start flex-column">
-      {loggedIn ? <Navbar /> : null}
+      {loggedIn ? <Navbar onLogout={logout} /> : null}
       <Routes>
         {loggedIn ? (
           <>
-            <Route path="/home" element={<HomePage />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/matriculas-disponiveis" element={<Matriculas />} />
+            <Route path="/matricula/:id" element={<Matricula />} />
             <Route path="/ranking" element={<Ranking />} />
             <Route path="/meu-perfil" element={<MeuPerfil />} />
             <Route path="/minha-casa" element={<MinhaCasa />} />
           </>
         ) : (
           <>
+            <Route
+              path="*"
+              element={
+                <LoginPage
+                  handleLogin={handleLogin}
+                  handleSignup={handleSignup}
+                  message={message}
+                  setMessage={setMessage}
+                />
+              }
+            />
             <Route
               path="/login"
               element={

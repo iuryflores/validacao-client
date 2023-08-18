@@ -48,6 +48,22 @@ class Api {
       throw error.response.data.msg;
     }
   };
+  getMatriculasNaoValidadas = async () => {
+    try {
+      const { data } = await this.api.get("/matriculas/");
+      return data;
+    } catch (error) {
+      throw error.response.data.msg;
+    }
+  };
+  getMatriculasById = async (matriculaID) => {
+    try {
+      const { data } = await this.api.get(`/matriculas/${matriculaID}`);
+      return data;
+    } catch (error) {
+      throw error.response.data.msg;
+    }
+  };
 }
 /* eslint-disable-next-line*/
 export default new Api();
