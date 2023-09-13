@@ -67,13 +67,13 @@ const Matriculas = () => {
                   </span>
                   <span>
                     <small>
-                      Qtd. de atos: <strong>{matricula.qtdAtos}</strong>
+                      Qtd. de atos: <strong>{matricula.qtdatos}</strong>
                     </small>
                   </span>
                 </div>
               );
-            })}
           </div>
+            })}
           <div className="mb-3 d-flex align-items-center justify-content-end">
             <label htmlFor="perPage">Matrículas por página:</label>
             <select

@@ -64,6 +64,14 @@ class Api {
       throw error.response.data.msg;
     }
   };
+  getAtosNaoValidadosMatriculasById = async (matriculaID) => {
+    try {
+      const { data } = await this.api.get(`/atos/nao-validados/matricula/${matriculaID}`);
+      return data;
+    } catch (error) {
+      throw error.response.data.msg;
+    }
+  };
 }
 /* eslint-disable-next-line*/
 export default new Api();

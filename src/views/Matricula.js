@@ -9,7 +9,7 @@ const Matricula = () => {
   useEffect(() => {
     const getMatricula = async () => {
       try {
-        const data = await api.getMatriculasById(id);
+        const data = await api.getAtosNaoValidadosMatriculasById(id);
         setMatriculas(data);
       } catch (error) {
         console.log(error);
@@ -30,7 +30,7 @@ const Matricula = () => {
   };
 
   const checkAtos = [];
-  for (let i = 1; i <= matricula.qtdAtos; i++)
+  for (let i = 1; i <= matricula.qtdatos; i++)
     checkAtos.push(
       <label key={i}>
         <input
@@ -39,15 +39,17 @@ const Matricula = () => {
           checked={selectedAtos.includes(`ato${i}`)}
           onChange={handleCheckboxChange}
         />
-        Ato {i}
+        {i}
       </label>
     );
 
   return (
     <div className="d-flex flex-column back-logado w-100 container mt-3 radios-5 p-3">
       <h2>Matrícula {matricula.codigo}</h2>
+
       <div>
         <div className="border p-3 mt-3 btn bg-dark text-light">
+          <div className="mb-3">Lista de atos</div>
           {checkAtos}
         </div>
       </div>
