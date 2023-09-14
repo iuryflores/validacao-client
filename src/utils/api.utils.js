@@ -3,7 +3,7 @@ import axios from "axios";
 class Api {
   constructor() {
     this.api = axios.create({
-      baseURL: "http://192.168.100.115:9000/",
+      baseURL: "http://localhost:9000/",
     });
     this.api.interceptors.request.use(
       (config) => {
@@ -59,6 +59,14 @@ class Api {
   getMatriculasById = async (matriculaID) => {
     try {
       const { data } = await this.api.get(`/matriculas/${matriculaID}`);
+      return data;
+    } catch (error) {
+      throw error.response.data.msg;
+    }
+  };
+  getAtosValidadosMatriculasById = async (matriculaID) => {
+    try {
+      const { data } = await this.api.get(`/atos/validados/matricula/${matriculaID}`);
       return data;
     } catch (error) {
       throw error.response.data.msg;

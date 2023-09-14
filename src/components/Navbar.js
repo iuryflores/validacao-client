@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -27,7 +27,7 @@ const Navbar = ({ onLogout }) => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/matriculas-disponiveis/">
+            <Link className="nav-link" to="/matriculas-nao-validadas/">
               Matrículas disponíveis
             </Link>
           </li>
