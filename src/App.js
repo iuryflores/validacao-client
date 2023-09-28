@@ -6,11 +6,11 @@ import { useState } from "react";
 import { LoginPage } from "./views/LoginPage";
 import HomePage from "./views/HomePage";
 import Navbar from "./components/Navbar";
-import Matriculas from "./views/MatriculasD";
 import Ranking from "./views/Ranking";
 import MeuPerfil from "./views/MeuPerfil";
 import MinhaCasa from "./views/MinhaCasa";
 import Matricula from "./views/Matricula";
+import MatriculasNaoValidadas from "./views/MatriculasNaoValidadas";
 
 function App() {
   const [message, setMessage] = useState("");
@@ -23,13 +23,12 @@ function App() {
   const userId = sessionStorage.getItem("token");
   const [loggedIn, setLoggedIn] = useState(!!userId);
 
-  console.log(loggedIn);
   const handleLogin = (username) => {
     // Aqui você pode realizar a autenticação adequada e definir o estado loggedIn
     setLoggedIn(true);
     navigate("/");
   };
-  const handleSignup = (username, password, departament, house) => {
+  const handleSignup = (username, password, departament, house, newEmail) => {
     // Aqui você pode adicionar lógica para registrar um novo usuário
     // e, em seguida, automaticamente fazer login com as credenciais fornecidas
     setLoggedIn(false);
@@ -49,7 +48,7 @@ function App() {
         {loggedIn ? (
           <>
             <Route path="/" element={<HomePage />} />
-            <Route path="/matriculas-disponiveis" element={<Matriculas />} />
+            <Route path="/matriculas-nao-validadas" element={<MatriculasNaoValidadas />} />
             <Route path="/matricula/:id" element={<Matricula />} />
             <Route path="/ranking" element={<Ranking />} />
             <Route path="/meu-perfil" element={<MeuPerfil />} />

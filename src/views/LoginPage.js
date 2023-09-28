@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import api from "../utils/api.utils.js";
+import { FormControl, InputGroup } from "react-bootstrap";
 
 export const LoginPage = ({
   handleLogin,
@@ -9,16 +10,18 @@ export const LoginPage = ({
   message,
   setMessage,
 }) => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const dominioPadrao = "1rigo.com"; // Substitua 'dominio.com' pelo seu domínio padrão
 
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.login({ username, password });
-      handleLogin(username);
+      await api.login({ email, password });
+      handleLogin(email);
     } catch (error) {
       setError(error);
       console.log({ error });
@@ -33,21 +36,32 @@ export const LoginPage = ({
   };
 
   const [newUsername, setNewUsername] = useState("");
+  const [newEmail, setNewEmail] = useState("");
 
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [departament, setDepartament] = useState("Analise");
+  const [departament, setDepartament] = useState("Análise");
   const [house, setHouse] = useState("Stark");
+
+  const handleNewEmailChange = (e) => {
+    setNewEmail(e.target.value);
+  };
 
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
 
     if (newPassword === confirmPassword) {
       try {
-        await api.signup({ newUsername, confirmPassword, departament, house });
+        await api.signup({
+          newUsername,
+          confirmPassword,
+          departament,
+          house,
+          newEmail,
+        });
         setMessage("Usuário criado com sucesso!");
-        handleSignup(newUsername, newPassword, departament, house);
+        handleSignup(newUsername, newPassword, departament, house, newEmail);
         signModeSwith(false);
       } catch (error) {
         setError(error);
@@ -60,6 +74,7 @@ export const LoginPage = ({
   useEffect(() => {
     setTimeout(() => {
       setError(null);
+      setMessage(null);
     }, 8000);
   }, [message, setMessage]);
 
@@ -83,7 +98,7 @@ export const LoginPage = ({
             <h2 className="mb-3">Cadastro</h2>
             <div className="mb-3">
               <label htmlFor="newUsername" className="form-label">
-                Nome de Usuário
+                Nome completo
               </label>
               <input
                 type="text"
@@ -94,6 +109,17 @@ export const LoginPage = ({
                 onChange={(e) => setNewUsername(e.target.value)}
               />
             </div>
+            <InputGroup className="mb-3">
+              <FormControl
+                id="newEmail"
+                name="newEmail"
+                value={newEmail}
+                onChange={handleNewEmailChange}
+                placeholder="Digite seu e-mail corporativo"
+                aria-label="E-mail corporativo"
+              />
+              <InputGroup.Text>@{dominioPadrao}</InputGroup.Text>
+            </InputGroup>
             <label htmlFor="newPassword" className="form-label">
               Senha
             </label>
@@ -165,14 +191,17 @@ export const LoginPage = ({
         ) : (
           <form onSubmit={handleSubmit}>
             <h1>ONRIGO</h1>
-            <input
-              type="text"
-              className="form-control mb-3"
-              placeholder="Usuário"
-              value={username}
-              autoComplete="username"
-              onChange={(e) => setUsername(e.target.value)}
-            />
+            <InputGroup className="mb-3">
+              <FormControl
+                id="Email"
+                name="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Digite seu e-mail corporativo"
+                aria-label="E-mail corporativo"
+              />
+              <InputGroup.Text>@{dominioPadrao}</InputGroup.Text>
+            </InputGroup>
             <input
               type="password"
               className="form-control"

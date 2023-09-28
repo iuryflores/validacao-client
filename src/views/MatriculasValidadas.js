@@ -7,7 +7,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import loadingGif from "../imgs/loading-state.gif";
 
-const Matriculas = () => {
+const MatriculasValidadas = () => {
   const [loading, setLoading] = useState(true);
 
   const [matriculas, setMatriculas] = useState([]);
@@ -67,13 +67,14 @@ const Matriculas = () => {
                   </span>
                   <span>
                     <small>
-                      Qtd. de atos: <strong>{matricula.qtdatos}</strong>
+                      Último ato: <strong>{matricula.qtdatos}</strong>
                     </small>
                   </span>
                 </div>
               );
-          </div>
             })}
+          </div>
+
           <div className="mb-3 d-flex align-items-center justify-content-end">
             <label htmlFor="perPage">Matrículas por página:</label>
             <select
@@ -116,4 +117,4 @@ const Matriculas = () => {
   );
 };
 
-export default Matriculas;
+export default MatriculasValidadas;
