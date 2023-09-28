@@ -1,7 +1,7 @@
 import "./App.css";
 
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import { LoginPage } from "./views/LoginPage";
 import HomePage from "./views/HomePage";
@@ -11,17 +11,18 @@ import MeuPerfil from "./views/MeuPerfil";
 import MinhaCasa from "./views/MinhaCasa";
 import Matricula from "./views/Matricula";
 import MatriculasNaoValidadas from "./views/MatriculasNaoValidadas";
+import api from "./utils/api.utils";
 
 function App() {
   const [message, setMessage] = useState("");
   //const [loading, setLoading] = useState(true);
 
-  let location = useLocation().pathname;
-  //let newLocation = location.slice(0, 6);
-  console.log(location);
+  const [userData, setUserData] = useState("");
+
   const navigate = useNavigate();
-  const userId = sessionStorage.getItem("token");
-  const [loggedIn, setLoggedIn] = useState(!!userId);
+  const userToken = sessionStorage.getItem("token");
+  const userId = sessionStorage.getItem("userId");
+  const [loggedIn, setLoggedIn] = useState(!!userToken);
 
   const handleLogin = (username) => {
     // Aqui você pode realizar a autenticação adequada e definir o estado loggedIn
@@ -40,15 +41,29 @@ function App() {
     setLoggedIn(false);
     navigate("/login");
   };
+  useEffect(() => {
+    const getUser = async (userId) => {
+      try {
+        const data = await api.getUserNav(userId);
+        setUserData(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getUser(userId);
+  }, [userId]);
 
   return (
     <div className="App d-flex justify-content-start flex-column">
-      {loggedIn ? <Navbar onLogout={logout} /> : null}
+      {loggedIn ? <Navbar onLogout={logout} userData={userData} /> : null}
       <Routes>
         {loggedIn ? (
           <>
             <Route path="/" element={<HomePage />} />
-            <Route path="/matriculas-nao-validadas" element={<MatriculasNaoValidadas />} />
+            <Route
+              path="/matriculas-nao-validadas"
+              element={<MatriculasNaoValidadas />}
+            />
             <Route path="/matricula/:id" element={<Matricula />} />
             <Route path="/ranking" element={<Ranking />} />
             <Route path="/meu-perfil" element={<MeuPerfil />} />

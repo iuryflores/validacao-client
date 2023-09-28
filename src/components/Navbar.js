@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const Navbar = ({ onLogout }) => {
+const Navbar = ({ onLogout, userData }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark w-100">
       <Link className="navbar-brand px-3" to="/">
@@ -52,6 +52,9 @@ const Navbar = ({ onLogout }) => {
             </Link>
           </li>
         </ul>
+      </div>
+      <div className="d-flex" style={{ color: "white", marginRight: "10px" }}>
+        {userData.full_name} <i className="bi bi-person-circle mx-1"></i>
       </div>
     </nav>
   );
