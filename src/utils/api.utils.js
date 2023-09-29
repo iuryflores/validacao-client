@@ -74,6 +74,16 @@ class Api {
       throw error.response.data.msg;
     }
   };
+  getAtosValidadosMatriculasById = async (matriculaID) => {
+    try {
+      const { data } = await this.api.get(
+        `/atos/validados/matricula/${matriculaID}`
+      );
+      return data;
+    } catch (error) {
+      throw error.response.data.msg;
+    }
+  };
   getUserNav = async (userId) => {
     try {
       const { data } = await this.api.get(`/user/${userId}`);

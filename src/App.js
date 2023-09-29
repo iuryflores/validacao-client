@@ -13,9 +13,11 @@ import Matricula from "./views/Matricula";
 import MatriculasNaoValidadas from "./views/MatriculasNaoValidadas";
 import api from "./utils/api.utils";
 
+import loadingGif from "./imgs/loading-state.gif";
+
 function App() {
   const [message, setMessage] = useState("");
-  //const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const [userData, setUserData] = useState("");
 
@@ -64,7 +66,16 @@ function App() {
               path="/matriculas-nao-validadas"
               element={<MatriculasNaoValidadas />}
             />
-            <Route path="/matricula/:id" element={<Matricula />} />
+            <Route
+              path="/matricula/:id"
+              element={
+                <Matricula
+                  loading={loading}
+                  setLoading={setLoading}
+                  loadingGif={loadingGif}
+                />
+              }
+            />
             <Route path="/ranking" element={<Ranking />} />
             <Route path="/meu-perfil" element={<MeuPerfil />} />
             <Route path="/minha-casa" element={<MinhaCasa />} />

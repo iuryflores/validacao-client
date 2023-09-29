@@ -2,27 +2,29 @@ import React, { useState, useEffect } from "react";
 import api from "../utils/api.utils";
 import { useParams } from "react-router-dom";
 
-const Matricula = () => {
-  const [matricula, setMatricula] = useState([]);
-  const [atos, setAtos] = useState([]);
+const Matricula = ({ loading, setLoading, loadingGif }) => {
+  const [matricula, setMatricula] = useState({});
+  const [matriculaValidadas, setMatriculaValidadas] = useState([]);
+  const [matriculaNaoValidadas, setMatriculaNaoValidadas] = useState([]);
 
   const { id } = useParams();
   useEffect(() => {
     const getAtosValidados = async () => {
       try {
-        const getAtos = await api.getAtosValidadosMatriculasById(id);
+        const naoValidada = await api.getAtosNaoValidadosMatriculasById(id);
+        const validadas = await api.getAtosValidadosMatriculasById(id);
         const getMat = await api.getMatriculasById(id);
         setMatricula(getMat);
-        setAtos(getAtos);
-        const data = await api.getAtosNaoValidadosMatriculasById(id);
-        setMatricula(data);
+        setMatriculaNaoValidadas(naoValidada);
+        setMatriculaValidadas(validadas);
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
     };
     getAtosValidados();
-  }, [id]);
-  console.log(matricula);
+  }, [id, setLoading]);
+
   const [selectedAtos, setSelectedAtos] = useState([]);
 
   const handleCheckboxChange = (event) => {
@@ -34,30 +36,85 @@ const Matricula = () => {
     }
   };
 
-  const checkAtos = [];
-  for (let i = 1; i <= matricula.qtdAtos; i++)
-    checkAtos.push(
-      <label key={i}>
-        <input
-          type="checkbox"
-          value={`ato${i}`}
-          checked={selectedAtos.includes(`ato${i}`)}
-          onChange={handleCheckboxChange}
-        />
-        Ato {i}
+  const checkAtos = matriculaNaoValidadas.map((ato, index) => (
+    <div
+      className="btn-group mx-1"
+      role="group"
+      aria-label="Basic checkbox toggle button group"
+      key={index}
+    >
+      <input
+        className="btn-check"
+        type="checkbox"
+        id={`ato${ato.ato}`}
+        autoComplete="off"
+        value={`ato${ato.ato}`}
+        checked={selectedAtos.includes(`ato${ato.ato}`)}
+        onChange={handleCheckboxChange}
+      />
+      <label htmlFor={`ato${ato.ato}`} className="btn btn-outline-primary">
+        {ato.ato}
       </label>
-    );
+    </div>
+  ));
+
+  const atosValidadosCheck = matriculaValidadas.map((ato, index) => (
+    <div
+      className="btn-group mx-1"
+      role="group"
+      aria-label="Basic checkbox toggle button group"
+      key={index}
+    >
+      <input
+        className="btn-check"
+        type="checkbox"
+        id={`ato${ato.ato}`}
+        autoComplete="off"
+        value={`ato${ato.ato}`}
+        checked
+        onChange={handleCheckboxChange}
+        disabled
+      />
+      <label htmlFor={`ato${ato.ato}`} className="btn btn-outline-primary">
+        {ato.ato}
+      </label>
+    </div>
+  ));
+
+  console.log(selectedAtos);
+
+  //formatar numero da matricula
+  const adicionarPonto = (matricula) => {
+    const numeroString = matricula.toString();
+    const parteInteira = numeroString.slice(0, -3);
+    const parteDecimal = numeroString.slice(-3);
+    return parteInteira + "." + parteDecimal;
+  };
 
   return (
     <div className="d-flex flex-column back-logado w-100 container mt-3 radios-5 p-3">
-      <h2>Matrícula {matricula.codigo}</h2>
-      <div>
-        <div className="border p-3 mt-3 btn bg-dark text-light">
-          <div className="mb-3">Lista de atos</div>
-          {checkAtos}
+      {!loading ? (
+        <>
+          <h2>Matrícula {adicionarPonto(matricula.codigo)}</h2>
+          <div className="p-3">
+            <div className="mt-3">
+              <div className="mb-3">Lista de atos para validar</div>
+              {checkAtos}
+            </div>
+            <button className="mt-3">Salvar</button>
+          </div>
+          <div>
+            <div className="p-3 mt-3">
+              <div className="mb-3">Lista de atos validados</div>
+              {atosValidadosCheck}
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className="d-flex justify-content-center">
+          <img style={{ width: "100px" }} src={loadingGif} alt="Loading gif" />
         </div>
-      </div>
-      <button className="mt-3">Salvar</button>
+      )}
     </div>
   );
 };
