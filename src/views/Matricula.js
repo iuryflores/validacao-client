@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import api from "../utils/api.utils";
 import { useParams } from "react-router-dom";
 
-const Matricula = ({ loading, setLoading, loadingGif }) => {
-  const [matricula, setMatricula] = useState({});
+const Matricula = ({ loading, setLoading, loadingGif, adicionarPonto }) => {
+  const [matricula, setMatricula] = useState(null);
   const [matriculaValidadas, setMatriculaValidadas] = useState([]);
   const [matriculaNaoValidadas, setMatriculaNaoValidadas] = useState([]);
 
@@ -11,6 +11,7 @@ const Matricula = ({ loading, setLoading, loadingGif }) => {
   useEffect(() => {
     const getAtosValidados = async () => {
       try {
+        setLoading(true);
         const naoValidada = await api.getAtosNaoValidadosMatriculasById(id);
         const validadas = await api.getAtosValidadosMatriculasById(id);
         const getMat = await api.getMatriculasById(id);
@@ -24,7 +25,7 @@ const Matricula = ({ loading, setLoading, loadingGif }) => {
     };
     getAtosValidados();
   }, [id, setLoading]);
-
+  console.log(loading);
   const [selectedAtos, setSelectedAtos] = useState([]);
 
   const handleCheckboxChange = (event) => {
@@ -81,21 +82,14 @@ const Matricula = ({ loading, setLoading, loadingGif }) => {
     </div>
   ));
 
-  console.log(selectedAtos);
-
-  //formatar numero da matricula
-  const adicionarPonto = (matricula) => {
-    const numeroString = matricula.toString();
-    const parteInteira = numeroString.slice(0, -3);
-    const parteDecimal = numeroString.slice(-3);
-    return parteInteira + "." + parteDecimal;
-  };
-
   return (
     <div className="d-flex flex-column back-logado w-100 container mt-3 radios-5 p-3">
       {!loading ? (
         <>
-          <h2>Matrícula {adicionarPonto(matricula.codigo)}</h2>
+          <h2>
+            Matrícula{" "}
+            {matricula !== null ? adicionarPonto(matricula.codigo) : null}
+          </h2>
           <div className="p-3">
             <div className="mt-3">
               <div className="mb-3">Lista de atos para validar</div>

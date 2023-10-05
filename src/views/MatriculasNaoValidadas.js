@@ -7,13 +7,13 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import loadingGif from "../imgs/loading-state.gif";
 
-const MatriculasNaoValidadas = () => {
+const MatriculasNaoValidadas = ({ adicionarPonto }) => {
   const [loading, setLoading] = useState(true);
 
   const [matriculas, setMatriculas] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [matriculasPerPage, setMatriculasPerPage] = useState(20); // Define quantas matrículas são exibidas por página
+  const [matriculasPerPage, setMatriculasPerPage] = useState(50); // Define quantas matrículas são exibidas por página
 
   const navigate = useNavigate();
 
@@ -51,7 +51,7 @@ const MatriculasNaoValidadas = () => {
   };
   return (
     <div className="d-flex flex-column back-logado w-100 container mt-3 radios-5 p-3">
-      <h2>Matrículas Não Validadas - {matriculas.length}</h2>
+      <h2>Matrículas Não Validadas - {adicionarPonto(matriculas.length)}</h2>
       {!loading ? (
         <>
           <div className="wrap-divs">
@@ -63,7 +63,8 @@ const MatriculasNaoValidadas = () => {
                   className="border bg-light p-2 btn cursor-pointer d-flex flex-column align-items-start"
                 >
                   <span>
-                    Matrícula: <strong>{matricula.codigo}</strong>
+                    Matrícula:{" "}
+                    <strong>{adicionarPonto(matricula.codigo)}</strong>
                   </span>
                   <span>
                     <small>
@@ -83,9 +84,9 @@ const MatriculasNaoValidadas = () => {
               onChange={handlePerPageChange}
               className="form-select w-25 mx-2"
             >
-              <option value={20}>20</option>
               <option value={50}>50</option>
               <option value={100}>100</option>
+              <option value={500}>500</option>
             </select>
           </div>
           <div className="pagination mt-3 align-items-center">

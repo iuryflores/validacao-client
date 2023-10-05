@@ -59,6 +59,17 @@ function App() {
     getUser(userId);
   }, [userId]);
 
+  //formatar numero da matricula
+  const adicionarPonto = (matricula) => {
+    if (matricula.lenght > 3 || matricula > 999) {
+      const numeroString = matricula.toString();
+      const parteInteira = numeroString.slice(0, -3);
+      const parteDecimal = numeroString.slice(-3);
+      return parteInteira + "." + parteDecimal;
+    } else {
+      return matricula;
+    }
+  };
   return (
     <div className="App d-flex justify-content-start flex-column">
       {loggedIn ? <Navbar onLogout={logout} userData={userData} /> : null}
@@ -76,12 +87,15 @@ function App() {
                   starkSigil={starkSigil}
                   targaryenSigil={targaryenSigil}
                   onrigoSigil={onrigoSigil}
+                  adicionarPonto={adicionarPonto}
                 />
               }
             />
             <Route
               path="/matriculas-nao-validadas"
-              element={<MatriculasNaoValidadas />}
+              element={
+                <MatriculasNaoValidadas adicionarPonto={adicionarPonto} />
+              }
             />
             <Route
               path="/matricula/:id"
@@ -90,6 +104,7 @@ function App() {
                   loading={loading}
                   setLoading={setLoading}
                   loadingGif={loadingGif}
+                  adicionarPonto={adicionarPonto}
                 />
               }
             />

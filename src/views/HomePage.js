@@ -9,6 +9,7 @@ const HomePage = ({
   targaryenSigil,
   starkSigil,
   onrigoSigil,
+  adicionarPonto,
 }) => {
   const [atos, setAtos] = useState("");
 
@@ -40,10 +41,10 @@ const HomePage = ({
               src={starkSigil}
               alt="Sigil da casa Stark que é a cabeça de um lobo, na cor preta e fundo transparente, dentro da imagem do lobo tem um texto escrito Winter is Comming Stark"
             />
-            <div class="card-body d-flex flex-column align-items-center">
-              <h5 class="btn-success btn">Atos validados</h5>
-              <p class="card-text fs-1">
-                <b>{atos.length}</b>
+            <div className="card-body d-flex flex-column align-items-center">
+              <h5 className="btn-success btn">Atos validados</h5>
+              <p className="card-text fs-1">
+                <b>{adicionarPonto(atos.length)}</b>
               </p>
             </div>
           </div>
@@ -53,10 +54,10 @@ const HomePage = ({
               src={targaryenSigil}
               alt="Sigil da casa Targaryen que é um dragão de 3 cabeças na cor preta e fundo transparente, abaixo tem uma texto que diz Fire and Blood"
             />
-            <div class="card-body d-flex flex-column align-items-center">
-              <h5 class="btn-success btn">Atos validados</h5>
-              <p class="card-text fs-1">
-                <b>{atos.length}</b>
+            <div className="card-body d-flex flex-column align-items-center">
+              <h5 className="btn-success btn">Atos validados</h5>
+              <p className="card-text fs-1">
+                <b>{adicionarPonto(atos.length)}</b>
               </p>
             </div>
           </div>
@@ -66,10 +67,10 @@ const HomePage = ({
               src={onrigoSigil}
               alt="Sigil da casa Targaryen que é um dragão de 3 cabeças na cor preta e fundo transparente, abaixo tem uma texto que diz Fire and Blood"
             />
-            <div class="card-body d-flex flex-column align-items-center">
-              <h5 class=" btn-success btn">Total de Atos validados</h5>
-              <p class="card-text fs-1">
-                <b>{totalAtos}</b>
+            <div className="card-body d-flex flex-column align-items-center">
+              <h5 className=" btn-success btn">Total de Atos validados</h5>
+              <p className="card-text fs-1">
+                <b>{adicionarPonto(totalAtos)}</b>
               </p>
             </div>
           </div>

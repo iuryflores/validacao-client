@@ -29,7 +29,7 @@ const MeuPerfil = ({
       <h2>Meu perfil</h2>
       {!loading ? (
         <>
-          <div className="wrap-divs d-flex flex-column align-items-center">
+          <div className="d-flex flex-column align-items-center">
             <div className="d-flex align-items-center justify-content-center">
               {userData.house === "Stark" ? (
                 <>

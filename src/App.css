@@ -4,8 +4,10 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  overflow: hidden;
   background-image: url("./imgs/back.jpg");
   background-size: cover;
+  background-attachment: fixed;
 }
 
 .login-container {
@@ -51,6 +53,13 @@ button {
   /* Centralizar a div principal */
   padding: 20px;
   /* Espaçamento interno da div principal */
+
+  height: 60vh;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  box-shadow: inset 0 0 10px rgba(255,255, 255, 0.1);
+  border-radius: 10px;
 }
 @media screen and (max-width: 720px) {
   .login-container {
