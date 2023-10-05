@@ -13,6 +13,10 @@ import Matricula from "./views/Matricula";
 import MatriculasNaoValidadas from "./views/MatriculasNaoValidadas";
 import api from "./utils/api.utils";
 
+import starkSigil from "./imgs/stark.png";
+import targaryenSigil from "./imgs/targaryen.png";
+import onrigoSigil from "./imgs/onrigo.png";
+
 import loadingGif from "./imgs/loading-state.gif";
 
 function App() {
@@ -61,7 +65,20 @@ function App() {
       <Routes>
         {loggedIn ? (
           <>
-            <Route path="/" element={<HomePage />} />
+            <Route
+              path="/"
+              element={
+                <HomePage
+                  userData={userData}
+                  loading={loading}
+                  setLoading={setLoading}
+                  loadingGif={loadingGif}
+                  starkSigil={starkSigil}
+                  targaryenSigil={targaryenSigil}
+                  onrigoSigil={onrigoSigil}
+                />
+              }
+            />
             <Route
               path="/matriculas-nao-validadas"
               element={<MatriculasNaoValidadas />}
@@ -77,7 +94,19 @@ function App() {
               }
             />
             <Route path="/ranking" element={<Ranking />} />
-            <Route path="/meu-perfil" element={<MeuPerfil />} />
+            <Route
+              path="/meu-perfil"
+              element={
+                <MeuPerfil
+                  userData={userData}
+                  loading={loading}
+                  setLoading={setLoading}
+                  loadingGif={loadingGif}
+                  starkSigil={starkSigil}
+                  targaryenSigil={targaryenSigil}
+                />
+              }
+            />
             <Route path="/minha-casa" element={<MinhaCasa />} />
           </>
         ) : (

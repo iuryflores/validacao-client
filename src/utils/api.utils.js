@@ -92,6 +92,14 @@ class Api {
       throw error.response.data.msg;
     }
   };
+  getAtosByUser = async (userId) => {
+    try {
+      const { data } = await this.api.get(`/atos/atos-validados/${userId}`);
+      return data;
+    } catch (error) {
+      throw error.response.data.msg;
+    }
+  };
 }
 /* eslint-disable-next-line*/
 export default new Api();
