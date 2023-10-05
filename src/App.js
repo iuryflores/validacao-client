@@ -72,7 +72,13 @@ function App() {
   };
   return (
     <div className="App d-flex justify-content-start flex-column">
-      {loggedIn ? <Navbar onLogout={logout} userData={userData} /> : null}
+      {loggedIn ? (
+        <Navbar
+          onLogout={logout}
+          userData={userData}
+          onrigoSigil={onrigoSigil}
+        />
+      ) : null}
       <Routes>
         {loggedIn ? (
           <>

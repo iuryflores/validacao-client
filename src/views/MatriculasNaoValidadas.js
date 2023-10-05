@@ -51,7 +51,7 @@ const MatriculasNaoValidadas = ({ adicionarPonto }) => {
   };
   return (
     <div className="d-flex flex-column back-logado w-100 container mt-3 radios-5 p-3">
-      <h2>Matrículas Não Validadas - {adicionarPonto(matriculas.length)}</h2>
+      <h2>Matrículas não validadas - {adicionarPonto(matriculas.length)}</h2>
       {!loading ? (
         <>
           <div className="wrap-divs">
