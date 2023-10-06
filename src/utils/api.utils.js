@@ -35,7 +35,11 @@ class Api {
     try {
       const { data } = await this.api.post("/user/auth/login", loginInfo);
       sessionStorage.setItem("token", data.token);
-      sessionStorage.setItem("userId", data.id);
+      sessionStorage.setItem("userId", data.userId);
+      sessionStorage.setItem(
+        "tokenExpirationTimestamp",
+        data.expirationTimestamp
+      );
     } catch (error) {
       throw error.response.data.msg;
     }
@@ -95,6 +99,14 @@ class Api {
   getAtosByUser = async (userId) => {
     try {
       const { data } = await this.api.get(`/atos/atos-validados/${userId}`);
+      return data;
+    } catch (error) {
+      throw error.response.data.msg;
+    }
+  };
+  getRanking = async () => {
+    try {
+      const { data } = await this.api.get(`/atos/validados/ranking/`);
       return data;
     } catch (error) {
       throw error.response.data.msg;

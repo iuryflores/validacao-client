@@ -14,6 +14,7 @@ const MeuPerfil = ({
   useEffect(() => {
     const getAtosByUser = async () => {
       try {
+        setLoading(true);
         const pegarAtos = await api.getAtosByUser(userData.full_name);
         setAtos(pegarAtos);
         setLoading(false);
@@ -23,7 +24,7 @@ const MeuPerfil = ({
     };
     getAtosByUser();
   }, [userData.full_name, setLoading]);
-  console.log(atos);
+
   return (
     <div className="d-flex flex-column back-logado w-100 container mt-3 radios-5 p-3">
       <h2>Meu perfil</h2>

@@ -31,13 +31,10 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(!!userToken);
 
   const handleLogin = (username) => {
-    // Aqui você pode realizar a autenticação adequada e definir o estado loggedIn
     setLoggedIn(true);
     navigate("/");
   };
   const handleSignup = (username, password, departament, house, newEmail) => {
-    // Aqui você pode adicionar lógica para registrar um novo usuário
-    // e, em seguida, automaticamente fazer login com as credenciais fornecidas
     setLoggedIn(false);
   };
 
@@ -45,23 +42,54 @@ function App() {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("userId");
     setLoggedIn(false);
-    navigate("/login");
+    navigate("/admin/login");
   };
+
+  const isTokenExpired = () => {
+    const tokenExpirationTimestamp = sessionStorage.getItem(
+      "tokenExpirationTimestamp"
+    );
+
+    // Verifica se o tokenExpirationTimestamp é uma data válida
+    if (!tokenExpirationTimestamp) {
+      // Se não houver um timestamp de expiração, consideramos o token como expirado
+      return true;
+    }
+
+    // Converte o timestamp para um objeto Date
+    const expirationDate = new Date(tokenExpirationTimestamp);
+
+    // Obtém a data e hora atuais
+    const currentDate = new Date();
+
+    // Compara se a data atual é maior que a data de expiração do token
+    return currentDate > expirationDate;
+  };
+
   useEffect(() => {
-    const getUser = async (userId) => {
-      try {
-        const data = await api.getUserNav(userId);
-        setUserData(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getUser(userId);
-  }, [userId]);
+    if (isTokenExpired()) {
+      sessionStorage.removeItem("token");
+      sessionStorage.removeItem("userId");
+      setLoggedIn(false);
+      navigate("/admin/login");
+      return;
+    }
+    if (loggedIn) {
+      const getUser = async (userId) => {
+        try {
+          const data = await api.getUserNav(userId);
+          setUserData(data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      getUser(userId);
+    }
+  }, [userId, navigate, loggedIn]);
 
   //formatar numero da matricula
   const adicionarPonto = (matricula) => {
-    if (matricula.lenght > 3 || matricula > 999) {
+    if (matricula.length > 3 || matricula > 999) {
       const numeroString = matricula.toString();
       const parteInteira = numeroString.slice(0, -3);
       const parteDecimal = numeroString.slice(-3);
@@ -100,21 +128,45 @@ function App() {
             <Route
               path="/matriculas-nao-validadas"
               element={
-                <MatriculasNaoValidadas adicionarPonto={adicionarPonto} />
+                <MatriculasNaoValidadas
+                  userData={userData}
+                  loading={loading}
+                  setLoading={setLoading}
+                  loadingGif={loadingGif}
+                  starkSigil={starkSigil}
+                  targaryenSigil={targaryenSigil}
+                  adicionarPonto={adicionarPonto}
+                />
               }
             />
             <Route
               path="/matricula/:id"
               element={
                 <Matricula
+                  userData={userData}
                   loading={loading}
                   setLoading={setLoading}
                   loadingGif={loadingGif}
+                  starkSigil={starkSigil}
+                  targaryenSigil={targaryenSigil}
                   adicionarPonto={adicionarPonto}
                 />
               }
             />
-            <Route path="/ranking" element={<Ranking />} />
+            <Route
+              path="/ranking"
+              element={
+                <Ranking
+                  userData={userData}
+                  loading={loading}
+                  setLoading={setLoading}
+                  loadingGif={loadingGif}
+                  starkSigil={starkSigil}
+                  targaryenSigil={targaryenSigil}
+                  adicionarPonto={adicionarPonto}
+                />
+              }
+            />
             <Route
               path="/meu-perfil"
               element={
@@ -125,6 +177,7 @@ function App() {
                   loadingGif={loadingGif}
                   starkSigil={starkSigil}
                   targaryenSigil={targaryenSigil}
+                  adicionarPonto={adicionarPonto}
                 />
               }
             />
@@ -144,7 +197,7 @@ function App() {
               }
             />
             <Route
-              path="/login"
+              path="/admin/login/"
               element={
                 <LoginPage
                   handleLogin={handleLogin}

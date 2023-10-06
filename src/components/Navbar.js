@@ -61,7 +61,7 @@ const Navbar = ({ onLogout, userData, onrigoSigil }) => {
               Minha casa
             </Link>
           </li>
-          <li className={`nav-item ${isLinkActive("/login/")}`}>
+          <li className={`nav-item ${isLinkActive("/admin/login/")}`}>
             <Link className="nav-link" onClick={onLogout} to="/login/">
               Sair
             </Link>
