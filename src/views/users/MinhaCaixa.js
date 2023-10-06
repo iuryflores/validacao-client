@@ -52,19 +52,23 @@ const MinhaCaixa = ({ adicionarPonto }) => {
     setCurrentPage(1); // Reset to first page when changing per page count
   };
 
-  const handleBattle = () => {};
+  const handleBattle = () => {
+    console.log("Solicita matrícula")
+  };
   return (
     <div className="d-flex flex-column back-logado w-100 container mt-3 radios-5 p-3">
-      <h2>Minhas tarefas</h2>
+      <h2 className="p-3">⚔️ O Destino da Validade está em Suas Mãos! ⚔️</h2>
+      <h5 className="p-3">
+        A cada validação, você avança em direção à vitória, sua casa se
+        fortalece e seu nome se torna lendário. Que a melhor casa prevaleça e
+        deixe sua marca na história do "Jogo da Validação".
+      </h5>
       {!loading ? (
         <>
-          <div className="mb-3 d-flex align-items-center justify-content-end">
-            <img
-              style={{ width: "30px" }}
-              src={battleIcon}
-              alt=""
-              onClick={handleBattle}
-            />
+          <div className="w-100 mb-3 d-flex align-items-center justify-content-end">
+            <div className="d-flex btn btn-outline-info" onClick={handleBattle}>
+              <h1>⚔️</h1>
+            </div>
           </div>
         </>
       ) : (
