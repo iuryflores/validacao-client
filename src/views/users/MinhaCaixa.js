@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import api from "../utils/api.utils";
+import api from "../../utils/api.utils";
 import { useNavigate } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-import loadingGif from "../imgs/loading-state.gif";
+import loadingGif from "../../imgs/loading-state.gif";
 
-const MatriculasNaoValidadas = ({ adicionarPonto }) => {
+const MinhaCaixa = ({ adicionarPonto }) => {
   const [loading, setLoading] = useState(true);
 
   const [matriculas, setMatriculas] = useState([]);
@@ -118,4 +118,4 @@ const MatriculasNaoValidadas = ({ adicionarPonto }) => {
   );
 };
 
-export default MatriculasNaoValidadas;
+export default MinhaCaixa;

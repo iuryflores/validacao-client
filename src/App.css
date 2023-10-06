@@ -60,6 +60,16 @@ button {
 .radios-5 {
   border-radius: 5px;
 }
+.other-divs {
+  height: 100vh;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.icon-user {
+  padding: 5px;
+}
+
 .wrap-divs {
   display: grid;
   grid-template-columns: repeat(5, 1fr);

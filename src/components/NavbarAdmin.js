@@ -2,13 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const Navbar = ({
-  onLogout,
-  userData,
-  onrigoSigil,
-  starkSigil,
-  targaryenSigil,
-}) => {
+const NavbarAdmin = ({ onLogout, userData, onrigoSigil }) => {
   const location = useLocation();
   const { pathname } = location;
 
@@ -60,23 +54,30 @@ const Navbar = ({
       </button>
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav ml-auto">
-          <li className={`nav-item ${isLinkActive("/users/")}`}>
-            <Link className="nav-link" to="/users/">
+          <li className={`nav-item ${isLinkActive("/")}`}>
+            <Link className="nav-link" to="/">
               Home
             </Link>
           </li>
-          <li className={`nav-item ${isLinkActive("/users/minha-caixa/")}`}>
-            <Link className="nav-link" to="/users/minha-caixa/">
-              Minhas matrículas
+          <li
+            className={`nav-item ${isLinkActive("/matriculas-nao-validadas/")}`}
+          >
+            <Link className="nav-link" to="/matriculas-nao-validadas/">
+              Matrículas disponíveis
             </Link>
           </li>
-          <li className={`nav-item ${isLinkActive("/users/meu-perfil/")}`}>
-            <Link className="nav-link" to="/users/meu-perfil/">
+          <li className={`nav-item ${isLinkActive("/ranking/")}`}>
+            <Link className="nav-link" to="/ranking/">
+              Ranking
+            </Link>
+          </li>
+          <li className={`nav-item ${isLinkActive("/meu-perfil/")}`}>
+            <Link className="nav-link" to="/meu-perfil/">
               Meu perfil
             </Link>
           </li>
-          <li className={`nav-item ${isLinkActive("/users/minha-casa/")}`}>
-            <Link className="nav-link" to="/users/minha-casa/">
+          <li className={`nav-item ${isLinkActive("/minha-casa/")}`}>
+            <Link className="nav-link" to="/minha-casa/">
               Minha casa
             </Link>
           </li>
@@ -92,26 +93,10 @@ const Navbar = ({
         style={{ fontWeight: "bold", marginRight: "10px" }}
       >
         {newNome}
-        {userData.house === "Stark" ? (
-          <div className="icon-user">
-            <img
-              style={{ width: "50px" }}
-              src={starkSigil}
-              alt="Sigil da casa Stark que é a cabeça de um lobo, na cor preta e fundo transparente, dentro da imagem do lobo tem um texto escrito Winter is Comming Stark"
-            />
-          </div>
-        ) : (
-          <div className="icon-user">
-            <img
-              style={{ width: "50px" }}
-              src={targaryenSigil}
-              alt="Sigil da casa Targaryen que é um dragão de 3 cabeças na cor preta e fundo transparente, abaixo tem uma texto que diz Fire and Blood"
-            />
-          </div>
-        )}
+        <i className="bi bi-person-circle mx-1 fs-2"></i>
       </div>
     </nav>
   );
 };
 
-export default Navbar;
+export default NavbarAdmin;

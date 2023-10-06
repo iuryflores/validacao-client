@@ -1,16 +1,17 @@
 import "./App.css";
 
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { LoginPage } from "./views/LoginPage";
-import HomePage from "./views/HomePage";
+import HomePage from "./views/admin/HomePage";
+import HomePageUser from "./views/users/HomePageUser";
 import Navbar from "./components/Navbar";
-import Ranking from "./views/Ranking";
-import MeuPerfil from "./views/MeuPerfil";
-import MinhaCasa from "./views/MinhaCasa";
+import Ranking from "./views/admin/Ranking";
+import MeuPerfil from "./views/users/MeuPerfil";
+import MinhaCasa from "./views/users/MinhaCasa";
 import Matricula from "./views/Matricula";
-import MatriculasNaoValidadas from "./views/MatriculasNaoValidadas";
+import MatriculasNaoValidadas from "./views/admin/MatriculasNaoValidadas";
 import api from "./utils/api.utils";
 
 import starkSigil from "./imgs/stark.png";
@@ -26,9 +27,14 @@ function App() {
   const [userData, setUserData] = useState("");
 
   const navigate = useNavigate();
+
+  const location = useLocation();
+
   const userToken = sessionStorage.getItem("token");
   const userId = sessionStorage.getItem("userId");
   const [loggedIn, setLoggedIn] = useState(!!userToken);
+
+  console.log(userData.admin);
 
   const handleLogin = (username) => {
     setLoggedIn(true);
@@ -41,9 +47,33 @@ function App() {
   const logout = () => {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("userId");
+    sessionStorage.removeItem("tokenExpirationTimestamp");
     setLoggedIn(false);
-    navigate("/admin/login");
+    navigate("/login/");
   };
+
+  let pathLogged = "";
+  console.log(location.pathname);
+
+  if (!userData.admin && location.pathname === pathLogged) {
+    logout();
+  }
+
+  if (userData.admin === true) {
+    pathLogged = "admin/";
+    if (location.pathname === "/users/") {
+      navigate("/admin/");
+    }
+  } else {
+    pathLogged = "users/";
+    if (location.pathname === "/admin/") {
+      navigate("/users/");
+    }
+  }
+
+  if (location.pathname === "/") {
+    navigate(`${pathLogged}`);
+  }
 
   const isTokenExpired = () => {
     const tokenExpirationTimestamp = sessionStorage.getItem(
@@ -71,7 +101,7 @@ function App() {
       sessionStorage.removeItem("token");
       sessionStorage.removeItem("userId");
       setLoggedIn(false);
-      navigate("/admin/login");
+      navigate("/login/");
       return;
     }
     if (loggedIn) {
@@ -98,6 +128,7 @@ function App() {
       return matricula;
     }
   };
+  console.log(pathLogged);
   return (
     <div className="App d-flex justify-content-start flex-column">
       {loggedIn ? (
@@ -105,28 +136,50 @@ function App() {
           onLogout={logout}
           userData={userData}
           onrigoSigil={onrigoSigil}
+          starkSigil={starkSigil}
+          targaryenSigil={targaryenSigil}
         />
       ) : null}
       <Routes>
         {loggedIn ? (
           <>
+            {pathLogged === "admin/" ? (
+              <Route
+                path="/admin/"
+                element={
+                  <HomePage
+                    userData={userData}
+                    loading={loading}
+                    setLoading={setLoading}
+                    loadingGif={loadingGif}
+                    starkSigil={starkSigil}
+                    targaryenSigil={targaryenSigil}
+                    onrigoSigil={onrigoSigil}
+                    adicionarPonto={adicionarPonto}
+                  />
+                }
+              />
+            ) : null}
+
+            {pathLogged === "users/" ? (
+              <Route
+                path="/users/"
+                element={
+                  <HomePageUser
+                    userData={userData}
+                    loading={loading}
+                    setLoading={setLoading}
+                    loadingGif={loadingGif}
+                    starkSigil={starkSigil}
+                    targaryenSigil={targaryenSigil}
+                    onrigoSigil={onrigoSigil}
+                    adicionarPonto={adicionarPonto}
+                  />
+                }
+              />
+            ) : null}
             <Route
-              path="/"
-              element={
-                <HomePage
-                  userData={userData}
-                  loading={loading}
-                  setLoading={setLoading}
-                  loadingGif={loadingGif}
-                  starkSigil={starkSigil}
-                  targaryenSigil={targaryenSigil}
-                  onrigoSigil={onrigoSigil}
-                  adicionarPonto={adicionarPonto}
-                />
-              }
-            />
-            <Route
-              path="/matriculas-nao-validadas"
+              path={`${pathLogged}matriculas-nao-validadas`}
               element={
                 <MatriculasNaoValidadas
                   userData={userData}
@@ -140,7 +193,7 @@ function App() {
               }
             />
             <Route
-              path="/matricula/:id"
+              path={`${pathLogged}matricula/:id`}
               element={
                 <Matricula
                   userData={userData}
@@ -154,7 +207,7 @@ function App() {
               }
             />
             <Route
-              path="/ranking"
+              path={`${pathLogged}ranking`}
               element={
                 <Ranking
                   userData={userData}
@@ -167,8 +220,9 @@ function App() {
                 />
               }
             />
+
             <Route
-              path="/meu-perfil"
+              path={`${pathLogged}meu-perfil`}
               element={
                 <MeuPerfil
                   userData={userData}
@@ -181,7 +235,21 @@ function App() {
                 />
               }
             />
-            <Route path="/minha-casa" element={<MinhaCasa />} />
+            <Route
+              path={`${pathLogged}minha-caixa`}
+              element={
+                <MeuPerfil
+                  userData={userData}
+                  loading={loading}
+                  setLoading={setLoading}
+                  loadingGif={loadingGif}
+                  starkSigil={starkSigil}
+                  targaryenSigil={targaryenSigil}
+                  adicionarPonto={adicionarPonto}
+                />
+              }
+            />
+            <Route path={`${pathLogged}minha-casa`} element={<MinhaCasa />} />
           </>
         ) : (
           <>
@@ -197,7 +265,7 @@ function App() {
               }
             />
             <Route
-              path="/admin/login/"
+              path={`${pathLogged}login/`}
               element={
                 <LoginPage
                   handleLogin={handleLogin}

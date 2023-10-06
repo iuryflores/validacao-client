@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import api from "../utils/api.utils";
+import api from "../../utils/api.utils";
 
 const MeuPerfil = ({
   userData,

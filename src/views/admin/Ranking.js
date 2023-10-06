@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import api from "../utils/api.utils";
+import api from "../../utils/api.utils";
 
 const Ranking = ({
   userData,
@@ -41,30 +41,37 @@ const Ranking = ({
     getAtosByUser();
   }, [userData.full_name, setLoading]);
 
-  console.log(ranking);
+  let place = 0;
   return (
     <div className="d-flex flex-column back-logado w-100 container mt-3 radios-5 p-3">
       <h2>Ranking</h2>
       {!loading ? (
         <>
           <div className="d-flex flex-column align-items-center">
-            <div className="d-flex align-items-center justify-content-center">
-              <table className="table">
+            <div className="d-flex align-items-center w-100 justify-content-center">
+              <table className="table w-100">
                 <thead>
                   <tr>
-                    <th>Casa</th>
-                    <th>Pontuação</th>
+                    <th style={{ width: "5%" }}>#</th>
+                    <th style={{ width: "50%" }}>Casa</th>
+                    <th style={{ width: "45%" }}>
+                      Quantidade de atos validados
+                    </th>
                   </tr>
                 </thead>
 
                 <tbody>
                   {ranking &&
-                    ranking.map((item, index) => (
-                      <tr key={index}>
-                        <td>{item.casa}</td>
-                        <td>{item.pontuacao}</td>
-                      </tr>
-                    ))}
+                    ranking.map((item, index) => {
+                      place++;
+                      return (
+                        <tr key={index}>
+                          <td>{place}º</td>
+                          <td>{item.casa}</td>
+                          <td>{item.pontuacao}</td>
+                        </tr>
+                      );
+                    })}
                 </tbody>
               </table>
             </div>

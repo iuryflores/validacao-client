@@ -104,6 +104,26 @@ class Api {
       throw error.response.data.msg;
     }
   };
+
+  getAtosValidados = async () => {
+    try {
+      const { data } = await this.api.get(`/atos/validados/geral`);
+      return data;
+    } catch (error) {
+      throw error.response.data.msg;
+    }
+  };
+
+  getAtosFiltrados = async (inicio, fim) => {
+    try {
+      const { data } = await this.api.get(
+        `/atos/validados/filtrados/${inicio}/${fim}`
+      );
+      return data;
+    } catch (error) {
+      throw error.response.data.msg;
+    }
+  };
   getRanking = async () => {
     try {
       const { data } = await this.api.get(`/atos/validados/ranking/`);
