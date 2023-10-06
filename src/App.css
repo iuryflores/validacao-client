@@ -1,4 +1,10 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
+
+@font-face {
+  font-family: Game;
+  src: url(./fonts/Game\ of\ Thrones.ttf);
+}
+
 .App {
   display: flex;
   justify-content: center;
@@ -15,16 +21,19 @@
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.5);
   width: 50% !important;
 }
 .navbar-brand {
   font-weight: 500;
+  font-family: Game;
 }
 .navbar-nav li {
   padding: 0 5px;
   margin: 0 5px;
-  font-weight: 500;
+  font-weight: bolder;
+  font-family: Game;
+  font-size: 0.7rem;
 }
 .navbar-nav li:hover {
   background-color: #042a5238;

@@ -7,6 +7,8 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import loadingGif from "../../imgs/loading-state.gif";
 
+import battleIcon from "../../imgs/battle.png";
+
 const MinhaCaixa = ({ adicionarPonto }) => {
   const [loading, setLoading] = useState(true);
 
@@ -49,64 +51,20 @@ const MinhaCaixa = ({ adicionarPonto }) => {
     setMatriculasPerPage(perPage);
     setCurrentPage(1); // Reset to first page when changing per page count
   };
+
+  const handleBattle = () => {};
   return (
     <div className="d-flex flex-column back-logado w-100 container mt-3 radios-5 p-3">
-      <h2>Matrículas não validadas - {adicionarPonto(matriculas.length)}</h2>
+      <h2>Minhas tarefas</h2>
       {!loading ? (
         <>
-          <div className="wrap-divs">
-            {currentMatriculas.map((matricula, index) => {
-              return (
-                <div
-                  key={index}
-                  onClick={() => goToMatricula(matricula._id)}
-                  className="border bg-light p-2 btn cursor-pointer d-flex flex-column align-items-start"
-                >
-                  <span>
-                    Matrícula:{" "}
-                    <strong>{adicionarPonto(matricula.codigo)}</strong>
-                  </span>
-                  <span>
-                    <small>
-                      Último ato: <strong>{matricula.qtdatos}</strong>
-                    </small>
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-
           <div className="mb-3 d-flex align-items-center justify-content-end">
-            <label htmlFor="perPage">Matrículas por página:</label>
-            <select
-              id="perPage"
-              value={matriculasPerPage}
-              onChange={handlePerPageChange}
-              className="form-select w-25 mx-2"
-            >
-              <option value={50}>50</option>
-              <option value={100}>100</option>
-              <option value={500}>500</option>
-            </select>
-          </div>
-          <div className="pagination mt-3 align-items-center">
-            <button
-              onClick={() => setCurrentPage(currentPage - 1)}
-              disabled={currentPage === 1}
-              className="btn btn-secondary me-1"
-            >
-              <i className="fa-solid fa-backward"></i>
-            </button>
-            <span className="align-middle">
-              {currentPage} de {totalPages}
-            </span>
-            <button
-              onClick={() => setCurrentPage(currentPage + 1)}
-              disabled={indexOfLastMatricula >= totalMatriculas}
-              className="btn btn-secondary ms-1"
-            >
-              <i className="fa-solid fa-forward"></i>
-            </button>
+            <img
+              style={{ width: "30px" }}
+              src={battleIcon}
+              alt=""
+              onClick={handleBattle}
+            />
           </div>
         </>
       ) : (

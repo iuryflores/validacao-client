@@ -11,73 +11,57 @@ const HomePageUser = ({
   onrigoSigil,
   adicionarPonto,
 }) => {
-  const [atosRanking, setAtosRanking] = useState("");
-
-  useEffect(() => {
-    const getAtosRanking = async () => {
-      try {
-        setLoading(true);
-        const pegarAtos = await api.getRanking();
-        setAtosRanking(pegarAtos);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getAtosRanking();
-  }, [userData.full_name, setLoading]);
-
-  const atosStarks = atosRanking.Stark || 0;
-  const atosTargaryen = atosRanking.Targaryen || 0;
-  const atosUndefined = atosRanking.undefined || 0;
-
-  const totalAtos = atosStarks + atosTargaryen + atosUndefined;
-
   return (
-    <div className="other-divs d-flex flex-column w-100 container mt-3 ">
+    <div
+      style={{ overflow: "hidden" }}
+      className="other-divs d-flex flex-column w-100 container mt-3 "
+    >
       {!loading ? (
         <div className="">
-          <div className="d-flex flex-column container back-logado radios-5 p-3">
-            <h5>Total de atos validados</h5>
-            <hr />
-            <div className="d-flex justify-content-around col-12 mt-3">
-              <div className="card d-flex align-items-center p-3 col-3">
-                <img
-                  style={{ width: "100px" }}
-                  src={starkSigil}
-                  alt="Sigil da casa Stark que é a cabeça de um lobo, na cor preta e fundo transparente, dentro da imagem do lobo tem um texto escrito Winter is Comming Stark"
-                />
-                <div className="card-body d-flex flex-column align-items-center">
-                  <p className="card-text fs-1">
-                    <b>{adicionarPonto(atosStarks)}</b>
-                  </p>
-                </div>
+          <div className="d-flex flex-column container back-logado radios-5 p-5">
+            <h4>🏰 Bem-vindo(a) ao "Jogo da Validação"</h4>
+            <h5 style={{ textIndent: "60px", marginTop: "10px" }}>
+              Os corredores do reino eletrônico ecoam com os murmúrios da grande
+              disputa que se aproxima. Nesta batalha épica, duas nobres casas se
+              destacam: Casa Stark e Casa Targaryen. Prepare-se para a guerra!
+            </h5>
+            {userData.house === "Stark" ? (
+              <div className="container d-flex flex-column align-items-center p-5">
+                <h4 style={{ fontFamily: "Game" }}>
+                  🐺 Casa Stark: Rigor e Lealdade! 🐺
+                </h4>
+                <h5
+                  className="fs-4 container"
+                  style={{ textIndent: "60px", textAlign: "justify" }}
+                >
+                  Os Stark são conhecidos por sua honra e determinação. Assim
+                  como o inverno que se aproxima, eles enfrentam os desafios com
+                  firmeza. Cada validação é um juramento ao dever, fortalecendo
+                  suas fileiras e consolidando sua posição.
+                </h5>
               </div>
-              <div className="card d-flex align-items-center p-3 col-3">
-                <img
-                  className="targaryenSigil"
-                  style={{ width: "100px" }}
-                  src={targaryenSigil}
-                  alt="Sigil da casa Targaryen que é um dragão de 3 cabeças na cor preta e fundo transparente, abaixo tem uma texto que diz Fire and Blood"
-                />
-                <div className="card-body d-flex flex-column align-items-center">
-                  <p className="card-text fs-1">
-                    <b>{adicionarPonto(atosTargaryen)}</b>
-                  </p>
-                </div>
+            ) : null}
+            {userData.house === "Targaryen" ? (
+              <div className="container">
+                <h5 style={{ fontFamily: "Game" }}>
+                  🔥 Casa Targaryen: Fogo e Poder! 🔥
+                </h5>
+                <p className="fs-4">
+                  Os Targaryen, com sangue de dragão, possuem a chama da
+                  ambição. Assim como seus antigos símbolos alados, eles buscam
+                  conquistar os desafios com fogo. Cada validação é um passo
+                  rumo ao trono, cada validação é um passo rumo à dominação.
+                </p>
               </div>
-              <div className="card d-flex align-items-center p-3 col-3">
-                <img
-                  style={{ width: "100px" }}
-                  src={onrigoSigil}
-                  alt="Sigil da casa Targaryen que é um dragão de 3 cabeças na cor preta e fundo transparente, abaixo tem uma texto que diz Fire and Blood"
-                />
-                <div className="card-body d-flex flex-column align-items-center">
-                  <p className="card-text fs-1">
-                    <b>{adicionarPonto(totalAtos)}</b>
-                  </p>
-                </div>
-              </div>
+            ) : null}
+            <div className="d-flex flex-column border p-2">
+              <h5>👑 Quem Reinará? Você Decide!</h5>
+              <p>
+                👑 Prepare-se para uma odisseia digital única no "Jogo da
+                Validação"! Erga seu estandarte e proclame que a busca pela
+                validação é nossa missão sagrada. Unidos, alcançaremos a vitória
+                e deixaremos uma lenda para os futuros participantes.
+              </p>
             </div>
           </div>
         </div>

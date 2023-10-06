@@ -39,13 +39,13 @@ const Navbar = ({
   }
   return (
     <nav className="navbar navbar-expand-lg  bg-light w-100">
-      <Link className="navbar-brand px-3" to="/">
+      <Link className="navbar-brand px-3 d-flex align-items-center" to="/">
         <img
           src={onrigoSigil}
           height="50px"
           alt="logo onrigo, tem um dragão vermelho de cabeça para baixo do lado direito e um logo preto de cabeça para cima do lado esquerto"
         />
-        ONRIGO - Validação
+        <span style={{ fontWeight: "bold" }}>ONRIGO</span>
       </Link>
       <button
         className="navbar-toggler"
@@ -67,7 +67,7 @@ const Navbar = ({
           </li>
           <li className={`nav-item ${isLinkActive("/users/minha-caixa/")}`}>
             <Link className="nav-link" to="/users/minha-caixa/">
-              Minhas matrículas
+              Minhas matriculas
             </Link>
           </li>
           <li className={`nav-item ${isLinkActive("/users/meu-perfil/")}`}>
@@ -80,6 +80,11 @@ const Navbar = ({
               Minha casa
             </Link>
           </li>
+          <li className={`nav-item ${isLinkActive("/users/ranking/")}`}>
+            <Link className="nav-link" to="/users/ranking/">
+              Ranking
+            </Link>
+          </li>
           <li className={`nav-item ${isLinkActive("/admin/login/")}`}>
             <Link className="nav-link" onClick={onLogout} to="/login/">
               Sair
@@ -89,7 +94,7 @@ const Navbar = ({
       </div>
       <div
         className="d-flex align-items-center"
-        style={{ fontWeight: "bold", marginRight: "10px" }}
+        style={{ fontWeight: "bold", marginRight: "10px", fontFamily: "Game" }}
       >
         {newNome}
         {userData.house === "Stark" ? (

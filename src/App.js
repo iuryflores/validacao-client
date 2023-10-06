@@ -19,6 +19,7 @@ import targaryenSigil from "./imgs/targaryen.png";
 import onrigoSigil from "./imgs/onrigo.png";
 
 import loadingGif from "./imgs/loading-state.gif";
+import MinhaCaixa from "./views/users/MinhaCaixa";
 
 function App() {
   const [message, setMessage] = useState("");
@@ -238,7 +239,7 @@ function App() {
             <Route
               path={`${pathLogged}minha-caixa`}
               element={
-                <MeuPerfil
+                <MinhaCaixa
                   userData={userData}
                   loading={loading}
                   setLoading={setLoading}
