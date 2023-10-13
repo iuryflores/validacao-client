@@ -10,13 +10,14 @@ import Navbar from "./components/Navbar";
 import Ranking from "./views/admin/Ranking";
 import MeuPerfil from "./views/users/MeuPerfil";
 import MinhaCasa from "./views/users/MinhaCasa";
-import Matricula from "./views/Matricula";
+import Matricula from "./views/users/Matricula";
 import MatriculasNaoValidadas from "./views/admin/MatriculasNaoValidadas";
 import api from "./utils/api.utils";
 
-import starkSigil from "./imgs/stark.png";
-import targaryenSigil from "./imgs/targaryen.png";
-import onrigoSigil from "./imgs/onrigo.png";
+import starkSigil from "./imgs/star@2x.png";
+import targaryenSigil from "./imgs/targ@2x.png";
+import onrigoSigil from "./imgs/logoONrigo@2x.png";
+import onrigoSigilHorizontal from "./imgs/horizontal@2x.png";
 
 import loadingGif from "./imgs/loading-state.gif";
 import MinhaCaixa from "./views/users/MinhaCaixa";
@@ -35,8 +36,6 @@ function App() {
   const userId = sessionStorage.getItem("userId");
   const [loggedIn, setLoggedIn] = useState(!!userToken);
 
-  console.log(userData.admin);
-
   const handleLogin = (username) => {
     setLoggedIn(true);
     navigate("/");
@@ -54,7 +53,6 @@ function App() {
   };
 
   let pathLogged = "";
-  console.log(location.pathname);
 
   if (!userData.admin && location.pathname === pathLogged) {
     logout();
@@ -129,14 +127,15 @@ function App() {
       return matricula;
     }
   };
-  console.log(pathLogged);
+
+  console.log(pathLogged)
   return (
     <div className="App d-flex justify-content-start flex-column">
       {loggedIn ? (
         <Navbar
           onLogout={logout}
           userData={userData}
-          onrigoSigil={onrigoSigil}
+          onrigoSigilHorizontal={onrigoSigilHorizontal}
           starkSigil={starkSigil}
           targaryenSigil={targaryenSigil}
         />
@@ -194,7 +193,7 @@ function App() {
               }
             />
             <Route
-              path={`${pathLogged}matricula/:id`}
+              path={`${pathLogged}matricula/:matriculaCodigo`}
               element={
                 <Matricula
                   userData={userData}
@@ -262,6 +261,7 @@ function App() {
                   handleSignup={handleSignup}
                   message={message}
                   setMessage={setMessage}
+                  onrigoSigil={onrigoSigil}
                 />
               }
             />
@@ -273,6 +273,7 @@ function App() {
                   handleSignup={handleSignup}
                   message={message}
                   setMessage={setMessage}
+                  onrigoSigil={onrigoSigil}
                 />
               }
             />
