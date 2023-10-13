@@ -151,6 +151,19 @@ class Api {
       throw error.response.data.msg;
     }
   };
+  validarAtos = async (atosValidados, matriculaAtual, userData) => {
+    try {
+      const { data } = await this.api.post(
+        `/atos/validar/`,
+        atosValidados,
+        matriculaAtual,
+        userData
+      );
+      return data;
+    } catch (error) {
+      throw error.response.data.msg;
+    }
+  };
 }
 /* eslint-disable-next-line*/
 export default new Api();

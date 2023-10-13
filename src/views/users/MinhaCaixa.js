@@ -7,8 +7,6 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import loadingGif from "../../imgs/loading-state.gif";
 
-// import battleIcon from "../../imgs/battle.png";
-
 const MinhaCaixa = ({ adicionarPonto, loading, setLoading, userData }) => {
   const [matricula, setMatricula] = useState([]);
   const [error, setError] = useState(null);
@@ -18,39 +16,35 @@ const MinhaCaixa = ({ adicionarPonto, loading, setLoading, userData }) => {
   const navigate = useNavigate();
 
   const userId = userData._id;
-  useEffect(() => {
-    if (userData.matricula_atual) {
-      setMatriculaAtual(userData.matricula_atual);
-    }
-    setLoading(false);
-  }, [setLoading, userData.matricula_atual]);
 
-  const goToMatricula = (matriculaCodigo) => {
-    navigate(`/users/matricula/${matriculaCodigo}`);
-  };
   const handleBattle = () => {
-    const getMatriculasNaoValidadas = async () => {
-      try {
-        setLoading(true);
-        const data = await api.getBattle({ userId });
-        setMatricula(data);
+    if (mostrarMatricula) {
+      setError("Finalize a matrícula abaixo antes de solicitar uma nova!");
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
+    } else {
+      const getMatriculasNaoValidadas = async () => {
+        try {
+          setLoading(true);
+          const data = await api.getBattle({ userId });
+          setMatricula(data);
 
-        if (getMatriculasNaoValidadas.length > 0) {
-          setError(null);
-        } else {
-          setError(matricula.msg);
-          console.log("finalize a matricula antes de solicitar outra");
+          if (getMatriculasNaoValidadas.length > 0) {
+            setError(null);
+          } else {
+            setError(matricula.msg);
+          }
+          setLoading(false);
+        } catch (error) {
+          setError("Erro ao obter a matrícula");
+          console.log(error, "Error");
+          setLoading(false);
         }
-        setLoading(false);
-      } catch (error) {
-        setError("Erro ao obter a matrícula");
-        console.log(error, "Error");
-        setLoading(false);
-      }
-    };
-    getMatriculasNaoValidadas();
+      };
+      getMatriculasNaoValidadas();
+    }
   };
-
   let mostrarMatricula;
 
   if (matricula.codigo || matricula.length) {
@@ -58,6 +52,17 @@ const MinhaCaixa = ({ adicionarPonto, loading, setLoading, userData }) => {
   } else if (matriculaAtual) {
     mostrarMatricula = matriculaAtual;
   }
+  const goToMatricula = (matriculaCodigo) => {
+    navigate(`/users/matricula/${matriculaCodigo}`);
+  };
+
+  useEffect(() => {
+    if (userData.matricula_atual) {
+      setMatriculaAtual(userData.matricula_atual);
+    }
+    setLoading(false);
+  }, [setLoading, userData.matricula_atual]);
+
   return (
     <div className="d-flex flex-column back-logado w-100 container mt-3 radios-5 p-3">
       <h2 className="p-3">⚔️ O Destino da Validação está em Suas Mãos! ⚔️</h2>
@@ -68,25 +73,19 @@ const MinhaCaixa = ({ adicionarPonto, loading, setLoading, userData }) => {
       </h5>
       {!loading ? (
         <div className="d-flex flex-column align-items-center">
-          {matriculaAtual ? (
-            <div className="w-100 mb-3 d-flex align-items-center justify-content-center">
-              <div className="alert alert-warning">
-                Finalize a matricula atual antes de solicitar uma nova!
-              </div>
+          <div className="w-100 mb-3 d-flex align-items-center justify-content-end">
+            <span>
+              Solicite uma matrícula <i className="bi bi-arrow-right-short"></i>
+            </span>
+            <div className="d-flex  btn btn-info mx-2" onClick={handleBattle}>
+              <h1>⚔️</h1>
             </div>
-          ) : (
-            <div className="w-100 mb-3 d-flex align-items-center justify-content-end">
-              <span>
-                Solicite uma matrícula{" "}
-                <i className="bi bi-arrow-right-short"></i>
-              </span>
-              <div className="d-flex  btn btn-info mx-2" onClick={handleBattle}>
-                <h1>⚔️</h1>
-              </div>
+          </div>
+          {error && (
+            <div className="w-100 mb-3 d-flex align-items-center justify-content-center">
+              <div className="alert alert-warning">{error}</div>
             </div>
           )}
-
-          {error && <div className="alert alert-danger">{error}</div>}
           {mostrarMatricula && (
             <div
               className="pergaminho d-flex fs-2 p-5 clickable"
