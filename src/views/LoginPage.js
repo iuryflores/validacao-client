@@ -9,6 +9,7 @@ export const LoginPage = ({
   handleSignup,
   message,
   setMessage,
+  onrigoSigil,
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -95,7 +96,9 @@ export const LoginPage = ({
         </div>
         {signupMode ? (
           <form onSubmit={handleSignupSubmit} className="p-3">
-            <h2 className="mb-3">Cadastro</h2>
+            <h2 className="mb-3" style={{ fontFamily: "Game" }}>
+              Cadastro
+            </h2>
             <div className="mb-3">
               <label htmlFor="newUsername" className="form-label">
                 Nome completo
@@ -190,7 +193,14 @@ export const LoginPage = ({
           </form>
         ) : (
           <form onSubmit={handleSubmit}>
-            <h1>ONRIGO</h1>
+            <div className="d-flex flex-column align-items-center">
+              <img
+                className="logo-login"
+                src={onrigoSigil}
+                height="50px"
+                alt="logo onrigo, tem um dragão vermelho de cabeça para baixo do lado direito e um logo preto de cabeça para cima do lado esquerto"
+              />
+            </div>
             <InputGroup className="mb-3">
               <FormControl
                 id="Email"

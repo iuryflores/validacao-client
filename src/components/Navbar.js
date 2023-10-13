@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const Navbar = ({
   onLogout,
   userData,
-  onrigoSigil,
+  onrigoSigilHorizontal,
   starkSigil,
   targaryenSigil,
 }) => {
@@ -19,7 +19,6 @@ const Navbar = ({
 
   const getNome = (nome) => {
     if (!nome) {
-      console.error("Nome vazio");
       return;
     }
     const partesNome = nome.split(" ");
@@ -38,14 +37,13 @@ const Navbar = ({
     newNome = primeiro + " " + ultimo;
   }
   return (
-    <nav className="navbar navbar-expand-lg  bg-light w-100">
+    <nav className="navbar navbar-expand-lg  w-100">
       <Link className="navbar-brand px-3 d-flex align-items-center" to="/">
         <img
-          src={onrigoSigil}
+          src={onrigoSigilHorizontal}
           height="50px"
           alt="logo onrigo, tem um dragão vermelho de cabeça para baixo do lado direito e um logo preto de cabeça para cima do lado esquerto"
         />
-        <span style={{ fontWeight: "bold" }}>ONRIGO</span>
       </Link>
       <button
         className="navbar-toggler"

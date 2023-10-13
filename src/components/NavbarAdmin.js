@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const NavbarAdmin = ({ onLogout, userData, onrigoSigil }) => {
+const NavbarAdmin = ({ onLogout, userData, onrigoSigilHorizontal }) => {
   const location = useLocation();
   const { pathname } = location;
 
@@ -13,7 +13,6 @@ const NavbarAdmin = ({ onLogout, userData, onrigoSigil }) => {
 
   const getNome = (nome) => {
     if (!nome) {
-      console.error("Nome vazio");
       return;
     }
     const partesNome = nome.split(" ");
@@ -32,14 +31,13 @@ const NavbarAdmin = ({ onLogout, userData, onrigoSigil }) => {
     newNome = primeiro + " " + ultimo;
   }
   return (
-    <nav className="navbar navbar-expand-lg  bg-light w-100">
+    <nav className="navbar navbar-expand-lg   w-100">
       <Link className="navbar-brand px-3" to="/">
         <img
-          src={onrigoSigil}
+          src={onrigoSigilHorizontal}
           height="50px"
           alt="logo onrigo, tem um dragão vermelho de cabeça para baixo do lado direito e um logo preto de cabeça para cima do lado esquerto"
         />
-        ONRIGO - Validação
       </Link>
       <button
         className="navbar-toggler"
