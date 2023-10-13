@@ -27,7 +27,7 @@ const MeuPerfil = ({
 
   return (
     <div className="d-flex flex-column back-logado w-100 container mt-3 radios-5 p-3">
-      <h2>Meu perfil</h2>
+      <h3 style={{ fontFamily: "Game" }}>Meu perfil</h3>
       {!loading ? (
         <>
           <div className="d-flex flex-column align-items-center">

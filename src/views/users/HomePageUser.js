@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import api from "../../utils/api.utils";
+import React /*, { useEffect, useState }*/ from "react";
+// import api from "../../utils/api.utils";
 
 const HomePageUser = ({
   userData,
@@ -11,6 +11,7 @@ const HomePageUser = ({
   onrigoSigil,
   adicionarPonto,
 }) => {
+  setLoading(false);
   return (
     <div
       style={{ overflow: "hidden" }}

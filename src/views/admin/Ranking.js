@@ -44,7 +44,7 @@ const Ranking = ({
   let place = 0;
   return (
     <div className="d-flex flex-column back-logado w-100 container mt-3 radios-5 p-3">
-      <h2>Ranking</h2>
+      <h3 style={{ fontFamily: "Game" }}>Ranking</h3>
       {!loading ? (
         <>
           <div className="d-flex flex-column align-items-center">
