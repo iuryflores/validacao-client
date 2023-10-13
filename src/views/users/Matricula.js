@@ -29,7 +29,6 @@ const Matricula = ({ loading, setLoading, loadingGif, adicionarPonto }) => {
     };
     getAtosValidados();
   }, [matriculaCodigo, setLoading]);
-  console.log(loading);
   const [selectedAtos, setSelectedAtos] = useState([]);
 
   const handleCheckboxChange = (event) => {
@@ -85,7 +84,6 @@ const Matricula = ({ loading, setLoading, loadingGif, adicionarPonto }) => {
       </label>
     </div>
   ));
-
   return (
     <div className="d-flex flex-column back-logado w-100 container mt-3 radios-5 p-3">
       {!loading ? (

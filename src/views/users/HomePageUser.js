@@ -1,4 +1,4 @@
-import React /*, { useEffect, useState }*/ from "react";
+import React, { useEffect, useState } from "react";
 // import api from "../../utils/api.utils";
 
 const HomePageUser = ({
@@ -11,7 +11,9 @@ const HomePageUser = ({
   onrigoSigil,
   adicionarPonto,
 }) => {
-  setLoading(false);
+  setInterval(() => {
+    setLoading(false);
+  }, 1000);
   return (
     <div
       style={{ overflow: "hidden" }}

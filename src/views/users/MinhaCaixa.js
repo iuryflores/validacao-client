@@ -58,8 +58,6 @@ const MinhaCaixa = ({ adicionarPonto, loading, setLoading, userData }) => {
   } else if (matriculaAtual) {
     mostrarMatricula = matriculaAtual;
   }
-  console.log(matriculaAtual);
-  console.log(matricula);
   return (
     <div className="d-flex flex-column back-logado w-100 container mt-3 radios-5 p-3">
       <h2 className="p-3">⚔️ O Destino da Validação está em Suas Mãos! ⚔️</h2>
@@ -94,7 +92,7 @@ const MinhaCaixa = ({ adicionarPonto, loading, setLoading, userData }) => {
               className="pergaminho d-flex fs-2 p-5 clickable"
               onClick={() => goToMatricula(mostrarMatricula)}
             >
-              {mostrarMatricula}
+              {adicionarPonto(mostrarMatricula)}
             </div>
           )}
         </div>

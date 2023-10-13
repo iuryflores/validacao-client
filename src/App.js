@@ -128,7 +128,6 @@ function App() {
     }
   };
 
-  console.log(pathLogged)
   return (
     <div className="App d-flex justify-content-start flex-column">
       {loggedIn ? (
