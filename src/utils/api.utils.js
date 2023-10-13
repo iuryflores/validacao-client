@@ -60,28 +60,39 @@ class Api {
       throw error.response.data.msg;
     }
   };
-  getMatriculasById = async (matriculaID) => {
-    try {
-      const { data } = await this.api.get(`/matriculas/${matriculaID}`);
-      return data;
-    } catch (error) {
-      throw error.response.data.msg;
-    }
-  };
-  getAtosNaoValidadosMatriculasById = async (matriculaID) => {
+  getBattle = async (userId) => {
     try {
       const { data } = await this.api.get(
-        `/atos/nao-validados/matricula/${matriculaID}`
+        "/matriculas/aleatoria/battle",
+        userId
       );
       return data;
     } catch (error) {
       throw error.response.data.msg;
     }
   };
-  getAtosValidadosMatriculasById = async (matriculaID) => {
+  getMatriculaByCodigo = async (matriculaCodigo) => {
+    try {
+      const { data } = await this.api.get(`/matriculas/${matriculaCodigo}`);
+      return data;
+    } catch (error) {
+      throw error.response.data.msg;
+    }
+  };
+  getAtosNaoValidadosMatriculaByCodigo = async (matriculaCodigo) => {
     try {
       const { data } = await this.api.get(
-        `/atos/validados/matricula/${matriculaID}`
+        `/atos/nao-validados/matricula/${matriculaCodigo}`
+      );
+      return data;
+    } catch (error) {
+      throw error.response.data.msg;
+    }
+  };
+  getAtosValidadosMatriculaByCodigo = async (matriculaCodigo) => {
+    try {
+      const { data } = await this.api.get(
+        `/atos/validados/matricula/${matriculaCodigo}`
       );
       return data;
     } catch (error) {
@@ -125,6 +136,14 @@ class Api {
     }
   };
   getRanking = async () => {
+    try {
+      const { data } = await this.api.get(`/atos/validados/ranking/`);
+      return data;
+    } catch (error) {
+      throw error.response.data.msg;
+    }
+  };
+  getRankingUsers = async () => {
     try {
       const { data } = await this.api.get(`/atos/validados/ranking/`);
       return data;

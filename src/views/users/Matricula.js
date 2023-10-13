@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import api from "../utils/api.utils";
+import api from "../../utils/api.utils";
 import { useParams } from "react-router-dom";
 
 const Matricula = ({ loading, setLoading, loadingGif, adicionarPonto }) => {
@@ -7,14 +7,18 @@ const Matricula = ({ loading, setLoading, loadingGif, adicionarPonto }) => {
   const [matriculaValidadas, setMatriculaValidadas] = useState([]);
   const [matriculaNaoValidadas, setMatriculaNaoValidadas] = useState([]);
 
-  const { id } = useParams();
+  const { matriculaCodigo } = useParams();
   useEffect(() => {
     const getAtosValidados = async () => {
       try {
         setLoading(true);
-        const naoValidada = await api.getAtosNaoValidadosMatriculasById(id);
-        const validadas = await api.getAtosValidadosMatriculasById(id);
-        const getMat = await api.getMatriculasById(id);
+        const naoValidada = await api.getAtosNaoValidadosMatriculaByCodigo(
+          matriculaCodigo
+        );
+        const validadas = await api.getAtosValidadosMatriculaByCodigo(
+          matriculaCodigo
+        );
+        const getMat = await api.getMatriculaByCodigo(matriculaCodigo);
         setMatricula(getMat);
         setMatriculaNaoValidadas(naoValidada);
         setMatriculaValidadas(validadas);
@@ -24,7 +28,7 @@ const Matricula = ({ loading, setLoading, loadingGif, adicionarPonto }) => {
       }
     };
     getAtosValidados();
-  }, [id, setLoading]);
+  }, [matriculaCodigo, setLoading]);
   console.log(loading);
   const [selectedAtos, setSelectedAtos] = useState([]);
 
