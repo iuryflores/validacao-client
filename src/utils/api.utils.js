@@ -3,7 +3,7 @@ import axios from "axios";
 class Api {
   constructor() {
     this.api = axios.create({
-      baseURL: "http://localhost:9000/",
+      baseURL: "http://localhost:9001/",
     });
     this.api.interceptors.request.use(
       (config) => {
@@ -33,7 +33,7 @@ class Api {
   }
   login = async (loginInfo) => {
     try {
-      const { data } = await this.api.post("/user/auth/login", loginInfo);
+      const { data } = await this.api.post("/auth/login", loginInfo);
       sessionStorage.setItem("token", data.token);
       sessionStorage.setItem("userId", data.userId);
       sessionStorage.setItem(

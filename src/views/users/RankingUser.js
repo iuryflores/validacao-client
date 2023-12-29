@@ -5,11 +5,11 @@ const RankingUser = ({
   userData,
   setLoading,
   loading,
-  loadingGif,
   targaryenSigil,
   starkSigil,
   onrigoSigil,
   adicionarPonto,
+  loadingGif
 }) => {
   const [atosRanking, setAtosRanking] = useState("");
 

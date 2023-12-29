@@ -3,7 +3,6 @@ import React from "react";
 
 const HomePageUser = ({
   userData,
-
   loadingGif,
   targaryenSigil,
   starkSigil,

@@ -4,7 +4,19 @@
   font-family: Game;
   src: url(./fonts/Game\ of\ Thrones.ttf);
 }
-
+#background-gif {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 2; /* Coloca o GIF acima do conteúdo */
+  background: url("./imgs/Sequência\ 01_1.gif") no-repeat center center fixed;
+  background-size: cover;
+  pointer-events: none; /* Garante que o GIF não seja interativo */
+  /* mix-blend-mode: multiply; */
+  filter: opacity(0.85);
+}
 .App {
   display: flex;
   justify-content: center;
@@ -15,7 +27,11 @@
   background-size: cover;
   background-attachment: fixed;
 }
-
+.card-dark {
+  color: white !important;
+  background-color: black !important;
+  border: 2px solid rgba(255, 255, 255, 0.116) !important
+}
 .login-container {
   /* border: 1px solid #ccc; */
   padding: 20px;
@@ -24,6 +40,7 @@
   background-color: rgba(0, 0, 0, 0.85);
   width: 50% !important;
   color: white;
+  z-index: 3;
 }
 .logo-login {
   height: 250px;
@@ -32,6 +49,7 @@
 .navbar {
   background-color: black;
   color: white;
+  z-index: 3;
 }
 
 .navbar-brand {
@@ -90,8 +108,9 @@ button {
   cursor: pointer;
 }
 .back-logado {
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.6);
   color: white;
+  z-index: 3;
 }
 .pergaminho {
   background: url("./imgs/pergaminho.png") no-repeat center center;
@@ -111,6 +130,7 @@ button {
   scroll-behavior: smooth;
   overflow-x: hidden;
   overflow-y: scroll;
+  z-index: 3;
 }
 .icon-user {
   padding: 5px;
@@ -128,7 +148,7 @@ button {
   /* Centralizar a div principal */
   padding: 20px;
   /* Espaçamento interno da div principal */
-
+  z-index: 3;
   height: 60vh;
   scroll-behavior: smooth;
   overflow-x: hidden;

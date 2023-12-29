@@ -5,9 +5,13 @@ import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-import loadingGif from "../../imgs/loading-state.gif";
-
-const MinhaCaixa = ({ adicionarPonto, loading, setLoading, userData }) => {
+const MinhaCaixa = ({
+  adicionarPonto,
+  loading,
+  setLoading,
+  userData,
+  loadingGif,
+}) => {
   const [matricula, setMatricula] = useState([]);
   const [error, setError] = useState(null);
 

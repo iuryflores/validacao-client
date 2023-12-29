@@ -19,7 +19,10 @@ import targaryenSigil from "./imgs/targ@2x.png";
 import onrigoSigil from "./imgs/logoONrigo@2x.png";
 import onrigoSigilHorizontal from "./imgs/horizontal@2x.png";
 
-import loadingGif from "./imgs/loading-state.gif";
+// import loadingGif from "./imgs/loading-state.gif";
+import loadingStark from "./imgs/stark.gif";
+import loadingTargaryen from "./imgs/targaryen.gif";
+
 import MinhaCaixa from "./views/users/MinhaCaixa";
 
 function App() {
@@ -127,6 +130,13 @@ function App() {
       return matricula;
     }
   };
+
+  let loadingGif;
+  if (userData.house === "Stark") {
+    loadingGif = loadingStark;
+  } else {
+    loadingGif = loadingTargaryen;
+  }
 
   return (
     <div className="App d-flex justify-content-start flex-column">

@@ -80,7 +80,7 @@ const HomePage = ({
             <h5>Total de atos validados</h5>
             <hr />
             <div className="d-flex justify-content-around col-12 mt-3">
-              <div className="card d-flex align-items-center p-3 col-3">
+              <div className="card card-dark d-flex align-items-center p-3 col-3">
                 <img
                   style={{ width: "100px" }}
                   src={starkSigil}
@@ -92,9 +92,9 @@ const HomePage = ({
                   </p>
                 </div>
               </div>
-              <div className="card d-flex align-items-center p-3 col-3">
+              <div className="card card-dark d-flex align-items-center p-3 col-3">
                 <img
-                className="targaryenSigil"
+                  className="targaryenSigil"
                   style={{ width: "100px" }}
                   src={targaryenSigil}
                   alt="Sigil da casa Targaryen que é um dragão de 3 cabeças na cor preta e fundo transparente, abaixo tem uma texto que diz Fire and Blood"
@@ -105,7 +105,7 @@ const HomePage = ({
                   </p>
                 </div>
               </div>
-              <div className="card d-flex align-items-center p-3 col-3">
+              <div className="card card-dark d-flex align-items-center p-3 col-3">
                 <img
                   style={{ width: "100px" }}
                   src={onrigoSigil}
@@ -126,14 +126,16 @@ const HomePage = ({
                 <DatePicker
                   selected={dataInicial}
                   onChange={(date) => setDataInicial(date)}
-                  className="form-control"
+                  className="form-control  bg-dark text-light"
                   placeholderText="Data Inicial"
+                  dateFormat="dd/MM/yyyy"
                 />
                 <DatePicker
                   selected={dataFinal}
                   onChange={(date) => setDataFinal(date)}
-                  className="form-control"
+                  className="form-control bg-dark text-light"
                   placeholderText="Data final"
+                  dateFormat="dd/MM/yyyy"
                 />
                 <div className="btn btn-primary" onClick={handleFiltrarAtos}>
                   Filtrar Atos
@@ -142,7 +144,7 @@ const HomePage = ({
             </div>
             <hr />
             <div className="d-flex justify-content-around col-12 mt-3">
-              <div className="card d-flex align-items-center p-3 col-3">
+              <div className="card card-dark d-flex align-items-center p-3 col-3">
                 <img
                   style={{ width: "100px" }}
                   src={starkSigil}
@@ -162,7 +164,7 @@ const HomePage = ({
                   </p>
                 </div>
               </div>
-              <div className="card d-flex align-items-center p-3 col-3">
+              <div className="card card-dark d-flex align-items-center p-3 col-3">
                 <img
                   style={{ width: "100px" }}
                   src={targaryenSigil}
@@ -182,7 +184,7 @@ const HomePage = ({
                   </p>
                 </div>
               </div>
-              <div className="card d-flex align-items-center p-3 col-3">
+              <div className="card card-dark d-flex align-items-center p-3 col-3">
                 <img
                   style={{ width: "100px" }}
                   src={onrigoSigil}

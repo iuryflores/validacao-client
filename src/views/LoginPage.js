@@ -210,7 +210,7 @@ export const LoginPage = ({
                 placeholder="Digite seu e-mail corporativo"
                 aria-label="E-mail corporativo"
               />
-              <InputGroup.Text>@{dominioPadrao}</InputGroup.Text>
+              <InputGroup.Text className="w-50">@{dominioPadrao}</InputGroup.Text>
             </InputGroup>
             <input
               type="password"
