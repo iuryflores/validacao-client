@@ -41,7 +41,7 @@ const MinhaCaixa = ({
           }
           setLoading(false);
         } catch (error) {
-          setError("Erro ao obter a matrícula");
+          setError(error);
           console.log(error, "Error");
           setLoading(false);
         }
@@ -69,7 +69,16 @@ const MinhaCaixa = ({
 
   return (
     <div className="d-flex flex-column back-logado w-100 container mt-3 radios-5 p-3">
-      <h2 className="p-3">⚔️ O Destino da Validação está em Suas Mãos! ⚔️</h2>
+      <h2 className="p-3">
+        {" "}
+        <span role="img" aria-label="Swords">
+          ⚔️
+        </span>{" "}
+        O Destino da Validação está em Suas Mãos!{" "}
+        <span role="img" aria-label="Swords">
+          ⚔️
+        </span>
+      </h2>
       <h5 className="p-3">
         A cada validação, você avança em direção à vitória, sua casa se
         fortalece e seu nome se torna lendário. Que a melhor casa prevaleça e
@@ -82,7 +91,11 @@ const MinhaCaixa = ({
               Solicite uma matrícula <i className="bi bi-arrow-right-short"></i>
             </span>
             <div className="d-flex  btn btn-info mx-2" onClick={handleBattle}>
-              <h1>⚔️</h1>
+              <h1>
+                <span role="img" aria-label="Swords">
+                  ⚔️
+                </span>
+              </h1>
             </div>
           </div>
           {error && (

@@ -1,17 +1,20 @@
 import "./App.css";
 
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { LoginPage } from "./views/LoginPage";
 import HomePage from "./views/admin/HomePage";
 import HomePageUser from "./views/users/HomePageUser";
 import Navbar from "./components/Navbar";
-import Ranking from "./views/admin/Ranking";
+import NavbarAdmin from "./components/NavbarAdmin";
+import { Footer } from "./components/Footer";
+import Ranking from "./views/admin/Batalha";
 import MeuPerfil from "./views/users/MeuPerfil";
 import MinhaCasa from "./views/users/MinhaCasa";
 import Matricula from "./views/users/Matricula";
-import MatriculasNaoValidadas from "./views/admin/MatriculasNaoValidadas";
+import MatriculasNaoValidadas from "./views/admin/Inimigo";
+
 import api from "./utils/api.utils";
 
 import starkSigil from "./imgs/star@2x.png";
@@ -24,6 +27,9 @@ import loadingStark from "./imgs/stark.gif";
 import loadingTargaryen from "./imgs/targaryen.gif";
 
 import MinhaCaixa from "./views/users/MinhaCaixa";
+import Batalha from "./views/admin/Batalha";
+import Inimigo from "./views/admin/Inimigo";
+import Mandato from "./views/admin/Mandato";
 
 function App() {
   const [message, setMessage] = useState("");
@@ -138,9 +144,19 @@ function App() {
     loadingGif = loadingTargaryen;
   }
 
-  return (
-    <div className="App d-flex justify-content-start flex-column">
-      {loggedIn ? (
+  const renderNavbar = () => {
+    if (pathLogged === "admin/") {
+      return (
+        <NavbarAdmin
+          onLogout={logout}
+          userData={userData}
+          onrigoSigilHorizontal={onrigoSigilHorizontal}
+          starkSigil={starkSigil}
+          targaryenSigil={targaryenSigil}
+        />
+      );
+    } else if (pathLogged === "users/") {
+      return (
         <Navbar
           onLogout={logout}
           userData={userData}
@@ -148,26 +164,79 @@ function App() {
           starkSigil={starkSigil}
           targaryenSigil={targaryenSigil}
         />
-      ) : null}
+      );
+    }
+  };
+  console.log(pathLogged);
+  return (
+    <div className="App d-flex justify-content-start flex-column">
+      {loggedIn && renderNavbar()}
       <Routes>
         {loggedIn ? (
           <>
             {pathLogged === "admin/" ? (
-              <Route
-                path="/admin/"
-                element={
-                  <HomePage
-                    userData={userData}
-                    loading={loading}
-                    setLoading={setLoading}
-                    loadingGif={loadingGif}
-                    starkSigil={starkSigil}
-                    targaryenSigil={targaryenSigil}
-                    onrigoSigil={onrigoSigil}
-                    adicionarPonto={adicionarPonto}
-                  />
-                }
-              />
+              <>
+                <Route
+                  path="/admin/"
+                  element={
+                    <HomePage
+                      userData={userData}
+                      loading={loading}
+                      setLoading={setLoading}
+                      loadingGif={loadingGif}
+                      starkSigil={starkSigil}
+                      targaryenSigil={targaryenSigil}
+                      onrigoSigil={onrigoSigil}
+                      adicionarPonto={adicionarPonto}
+                    />
+                  }
+                />
+                <Route
+                  path="/admin/batalha"
+                  element={
+                    <Batalha
+                      userData={userData}
+                      loading={loading}
+                      setLoading={setLoading}
+                      loadingGif={loadingGif}
+                      starkSigil={starkSigil}
+                      targaryenSigil={targaryenSigil}
+                      onrigoSigil={onrigoSigil}
+                      adicionarPonto={adicionarPonto}
+                    />
+                  }
+                />
+                <Route
+                  path="/admin/inimigo"
+                  element={
+                    <Inimigo
+                      userData={userData}
+                      loading={loading}
+                      setLoading={setLoading}
+                      loadingGif={loadingGif}
+                      starkSigil={starkSigil}
+                      targaryenSigil={targaryenSigil}
+                      onrigoSigil={onrigoSigil}
+                      adicionarPonto={adicionarPonto}
+                    />
+                  }
+                />
+                <Route
+                  path="/admin/mandato"
+                  element={
+                    <Mandato
+                      userData={userData}
+                      loading={loading}
+                      setLoading={setLoading}
+                      loadingGif={loadingGif}
+                      starkSigil={starkSigil}
+                      targaryenSigil={targaryenSigil}
+                      onrigoSigil={onrigoSigil}
+                      adicionarPonto={adicionarPonto}
+                    />
+                  }
+                />
+              </>
             ) : null}
 
             {pathLogged === "users/" ? (
@@ -289,6 +358,7 @@ function App() {
           </>
         )}
       </Routes>
+      {loggedIn ? <Footer /> : null}
     </div>
   );
 }

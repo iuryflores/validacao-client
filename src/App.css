@@ -2,21 +2,45 @@
 
 @font-face {
   font-family: Game;
-  src: url(./fonts/Game\ of\ Thrones.ttf);
+  src: url(./fonts/Game_of_Thrones.ttf);
 }
+
+.help-info {
+  font-size: small;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  /* Define o número de colunas e o tamanho mínimo/máximo */
+  gap: 15px;
+  /* Define o espaço entre as colunas e as linhas */
+}
+
+.grid-item {
+  background-color: black !important;
+}
+
+.grid-item:hover {
+  background-color: #333 !important;
+}
+
 #background-gif {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100%;
+  height: 180%;
   width: 100%;
-  z-index: 2; /* Coloca o GIF acima do conteúdo */
-  background: url("./imgs/Sequência\ 01_1.gif") no-repeat center center fixed;
+  z-index: 2;
+  /* Coloca o GIF acima do conteúdo */
+  background: url("./imgs/Sequência_01_1.gif") no-repeat center center fixed;
   background-size: cover;
-  pointer-events: none; /* Garante que o GIF não seja interativo */
+  pointer-events: none;
+  /* Garante que o GIF não seja interativo */
   /* mix-blend-mode: multiply; */
   filter: opacity(0.85);
 }
+
 .App {
   display: flex;
   justify-content: center;
@@ -27,11 +51,13 @@
   background-size: cover;
   background-attachment: fixed;
 }
+
 .card-dark {
   color: white !important;
   background-color: black !important;
   border: 2px solid rgba(255, 255, 255, 0.116) !important
 }
+
 .login-container {
   /* border: 1px solid #ccc; */
   padding: 20px;
@@ -42,10 +68,12 @@
   color: white;
   z-index: 3;
 }
+
 .logo-login {
   height: 250px;
   margin-bottom: 10px;
 }
+
 .navbar {
   background-color: black;
   color: white;
@@ -56,6 +84,7 @@
   font-weight: 500;
   font-family: Game;
 }
+
 .navbar-nav li {
   padding: 0 5px;
   margin: 0 5px;
@@ -64,6 +93,7 @@
   font-size: 0.7rem;
   color: white;
 }
+
 .navbar-nav li:hover {
   /* background-color: #042a5238; */
   color: white !important;
@@ -71,19 +101,24 @@
   border-radius: 5px 15px;
   transition: all 0.5s;
 }
+
 .navbar-nav li a {
   color: rgba(255, 255, 255, 0.527);
 }
+
 .navbar-nav li:hover a {
   color: white;
 }
+
 .active {
   background-color: #520404;
   border-radius: 5px 15px;
 }
+
 .active a {
   color: white !important;
 }
+
 input {
   width: 100%;
   padding: 10px;
@@ -91,14 +126,17 @@ input {
   border: 1px solid #ccc;
   border-radius: 3px;
 }
+
 .fade-out {
   opacity: 1;
-  transition: opacity 0.5s ease-out; /* Adjust the duration and easing as needed */
+  transition: opacity 0.5s ease-out;
+  /* Adjust the duration and easing as needed */
 }
 
 .fade-out.invisible {
   opacity: 0;
 }
+
 button {
   background-color: #007bff;
   color: white;
@@ -107,11 +145,13 @@ button {
   border-radius: 3px;
   cursor: pointer;
 }
+
 .back-logado {
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
   z-index: 3;
 }
+
 .pergaminho {
   background: url("./imgs/pergaminho.png") no-repeat center center;
   background-size: cover;
@@ -119,12 +159,15 @@ button {
   color: rgba(0, 0, 0, 0.705);
   font-weight: bold;
 }
+
 .clickable:hover {
   cursor: pointer;
 }
+
 .radios-5 {
   border-radius: 5px;
 }
+
 .other-divs {
   height: 100vh;
   scroll-behavior: smooth;
@@ -132,6 +175,7 @@ button {
   overflow-y: scroll;
   z-index: 3;
 }
+
 .icon-user {
   padding: 5px;
 }
@@ -156,6 +200,39 @@ button {
   box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
   border-radius: 10px;
 }
+
+footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  background-color: #8c8c8c3c;
+  color: white;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  font-size: 0.8rem;
+  padding: 5px;
+  z-index: 15;
+
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+footer a {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  z-index: 15;
+}
+
+footer img {
+  width: 35px;
+  filter:saturate();
+}
+
 @media screen and (max-width: 720px) {
   .login-container {
     width: 90% !important;
