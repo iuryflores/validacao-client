@@ -7,7 +7,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import loadingGif from "../../imgs/loading-state.gif";
 
-const MatriculasNaoValidadas = ({ adicionarPonto }) => {
+const Inimigo = ({ adicionarPonto }) => {
   const [loading, setLoading] = useState(true);
 
   const [matriculas, setMatriculas] = useState([]);
@@ -118,4 +118,4 @@ const MatriculasNaoValidadas = ({ adicionarPonto }) => {
   );
 };
 
-export default MatriculasNaoValidadas;
+export default Inimigo;

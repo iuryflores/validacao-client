@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../../utils/api.utils";
 
-const Ranking = ({
+const Batalha = ({
   userData,
   setLoading,
   loading,
@@ -44,7 +44,7 @@ const Ranking = ({
   let place = 0;
   return (
     <div className="d-flex flex-column back-logado w-100 container mt-3 radios-5 p-3">
-      <h3 style={{ fontFamily: "Game" }}>Ranking</h3>
+      <h3 style={{ fontFamily: "Game" }}>Batalha</h3>
       {!loading ? (
         <>
           <div className="d-flex flex-column align-items-center">
@@ -86,4 +86,4 @@ const Ranking = ({
   );
 };
 
-export default Ranking;
+export default Batalha;

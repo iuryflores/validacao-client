@@ -164,6 +164,14 @@ class Api {
       throw error.response.data.msg;
     }
   };
+  addValidadoCampo = async () => {
+    try {
+      const { data } = await this.api.put(`/admin/atualizar/atos/`);
+      return data;
+    } catch (error) {
+      throw error.response.data.msg;
+    }
+  };
 }
 /* eslint-disable-next-line*/
 export default new Api();

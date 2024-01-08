@@ -16,7 +16,12 @@ const HomePageUser = ({
     >
       <div className="">
         <div className="d-flex flex-column container back-logado radios-5 p-5">
-          <h4>🏰 Bem-vindo(a) ao "Jogo da Validação"</h4>
+          <h4>
+            <span role="img" aria-label="Castle">
+              🏰
+            </span>{" "}
+            Bem-vindo(a) ao "Jogo da Validação"
+          </h4>
           <h5 style={{ textIndent: "60px", marginTop: "10px" }}>
             Os corredores do reino eletrônico ecoam com os murmúrios da grande
             disputa que se aproxima. Nesta batalha épica, duas nobres casas se
@@ -25,7 +30,14 @@ const HomePageUser = ({
           {userData.house === "Stark" ? (
             <div className="container d-flex flex-column align-items-center p-5">
               <h4 style={{ fontFamily: "Game" }}>
-                🐺 Casa Stark: Rigor e Lealdade! 🐺
+                <span role="img" aria-label="Wolf">
+                  {" "}
+                  🐺
+                </span>
+                Casa Stark: Rigor e Lealdade!{" "}
+                <span role="img" aria-label="Wolf">
+                  🐺
+                </span>
               </h4>
               <h5
                 className="fs-4 container"
@@ -41,7 +53,13 @@ const HomePageUser = ({
           {userData.house === "Targaryen" ? (
             <div className="container">
               <h5 style={{ fontFamily: "Game" }}>
-                🔥 Casa Targaryen: Fogo e Poder! 🔥
+                <span role="img" aria-label="Fire">
+                  🔥
+                </span>{" "}
+                Casa Targaryen: Fogo e Poder!{" "}
+                <span role="img" aria-label="Fire">
+                  🔥
+                </span>
               </h5>
               <p className="fs-4">
                 Os Targaryen, com sangue de dragão, possuem a chama da ambição.
@@ -52,12 +70,20 @@ const HomePageUser = ({
             </div>
           ) : null}
           <div className="d-flex flex-column border p-2">
-            <h5>👑 Quem Reinará? Você Decide!</h5>
+            <h5>
+              <span role="img" aria-label="Crow">
+                👑
+              </span>{" "}
+              Quem Reinará? Você Decide!
+            </h5>
             <p>
-              👑 Prepare-se para uma odisseia digital única no "Jogo da
-              Validação"! Erga seu estandarte e proclame que a busca pela
-              validação é nossa missão sagrada. Unidos, alcançaremos a vitória e
-              deixaremos uma lenda para os futuros participantes.
+              <span role="img" aria-label="Crow">
+                👑
+              </span>{" "}
+              Prepare-se para uma odisseia digital única no "Jogo da Validação"!
+              Erga seu estandarte e proclame que a busca pela validação é nossa
+              missão sagrada. Unidos, alcançaremos a vitória e deixaremos uma
+              lenda para os futuros participantes.
             </p>
           </div>
         </div>

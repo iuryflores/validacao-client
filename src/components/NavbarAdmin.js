@@ -2,7 +2,13 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const NavbarAdmin = ({ onLogout, userData, onrigoSigilHorizontal }) => {
+const NavbarAdmin = ({
+  onLogout,
+  userData,
+  onrigoSigilHorizontal,
+  starkSigil,
+  targaryenSigil,
+}) => {
   const location = useLocation();
   const { pathname } = location;
 
@@ -57,30 +63,28 @@ const NavbarAdmin = ({ onLogout, userData, onrigoSigilHorizontal }) => {
               Home
             </Link>
           </li>
-          <li
-            className={`nav-item ${isLinkActive("/matriculas-nao-validadas/")}`}
-          >
-            <Link className="nav-link" to="/matriculas-nao-validadas/">
-              Matrículas disponíveis
+          <li className={`nav-item ${isLinkActive("/admin/inimigo/")}`}>
+            <Link className="nav-link" to="/admin/inimigo/">
+              Inimigo
             </Link>
           </li>
-          <li className={`nav-item ${isLinkActive("/ranking/")}`}>
-            <Link className="nav-link" to="/ranking/">
-              Ranking
+          <li className={`nav-item ${isLinkActive("/admin/batalha/")}`}>
+            <Link className="nav-link" to="/admin/batalha/">
+              Batalha
             </Link>
           </li>
-          <li className={`nav-item ${isLinkActive("/meu-perfil/")}`}>
+          {/* <li className={`nav-item ${isLinkActive("/meu-perfil/")}`}>
             <Link className="nav-link" to="/meu-perfil/">
               Meu perfil
             </Link>
-          </li>
-          <li className={`nav-item ${isLinkActive("/minha-casa/")}`}>
-            <Link className="nav-link" to="/minha-casa/">
-              Minha casa
+          </li> */}
+          <li className={`nav-item ${isLinkActive("/admin/mandato/")}`}>
+            <Link className="nav-link" to="/admin/mandato/">
+              Mandato
             </Link>
           </li>
           <li className={`nav-item ${isLinkActive("/admin/login/")}`}>
-            <Link className="nav-link" onClick={onLogout} to="/login/">
+            <Link className="nav-link" onClick={onLogout} to="/admin/login/">
               Sair
             </Link>
           </li>
@@ -88,10 +92,26 @@ const NavbarAdmin = ({ onLogout, userData, onrigoSigilHorizontal }) => {
       </div>
       <div
         className="d-flex align-items-center"
-        style={{ fontWeight: "bold", marginRight: "10px" }}
+        style={{ fontWeight: "bold", marginRight: "10px", fontFamily: "Game" }}
       >
         {newNome}
-        <i className="bi bi-person-circle mx-1 fs-2"></i>
+        {userData.house === "Stark" ? (
+          <div className="icon-user">
+            <img
+              style={{ width: "50px" }}
+              src={starkSigil}
+              alt="Sigil da casa Stark que é a cabeça de um lobo, na cor preta e fundo transparente, dentro da imagem do lobo tem um texto escrito Winter is Comming Stark"
+            />
+          </div>
+        ) : (
+          <div className="icon-user">
+            <img
+              style={{ width: "50px" }}
+              src={targaryenSigil}
+              alt="Sigil da casa Targaryen que é um dragão de 3 cabeças na cor preta e fundo transparente, abaixo tem uma texto que diz Fire and Blood"
+            />
+          </div>
+        )}
       </div>
     </nav>
   );
