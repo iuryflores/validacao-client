@@ -3,6 +3,8 @@ import api from "../../utils/api.utils";
 import { useNavigate, useParams } from "react-router-dom";
 
 const Matricula = ({
+  message,
+  setMessage,
   loading,
   setLoading,
   loadingGif,
@@ -34,11 +36,13 @@ const Matricula = ({
         setMatriculaValidadas(validadas);
         setLoading(false);
       } catch (error) {
+        setLoading(false);
+        setMessage("Não foi possível carregar atos");
         console.log(error);
       }
     };
     getAtosValidados();
-  }, [matriculaCodigo, setLoading]);
+  }, [matriculaCodigo, setLoading, setMessage]);
   const [selectedAtos, setSelectedAtos] = useState([]);
 
   const handleCheckboxChange = (event) => {
@@ -125,40 +129,46 @@ const Matricula = ({
             Matrícula{" "}
             {matricula !== null ? adicionarPonto(matricula.codigo) : null}
           </h2>
-          <div className="p-3">
-            <div className="card border-warning">
-              <div className="card-header text-bg-warning">
-                <i className="bi bi-caret-down-fill"></i>
-                <b>ATOS NÃO VALIDADOS</b>
+
+          {message && <div className="alert alert-info">{message}</div>}
+          {!message && (
+            <>
+              <div className="p-3">
+                <div className="card border-warning">
+                  <div className="card-header text-bg-warning">
+                    <i className="bi bi-caret-down-fill"></i>
+                    <b>ATOS NÃO VALIDADOS</b>
+                  </div>
+                  <div
+                    className="card-body text-bg-dark"
+                    style={{ borderRadius: "0 0 5px 5px" }}
+                  >
+                    {checkAtos}
+                  </div>
+                </div>
+                <div className="w-100 d-flex flex-column align-items-end">
+                  <button className="mt-3" onClick={handleValidar}>
+                    Salvar
+                  </button>
+                </div>
               </div>
-              <div
-                className="card-body text-bg-dark"
-                style={{ borderRadius: "0 0 5px 5px" }}
-              >
-                {checkAtos}
+              <hr />
+              <div className="p-3">
+                <div className="card border-primary">
+                  <div className="card-header text-bg-primary">
+                    <i className="bi bi-caret-down-fill"></i>
+                    <b>ATOS VALIDADOS</b>
+                  </div>
+                  <div
+                    className="card-body text-bg-dark"
+                    style={{ borderRadius: "0 0 5px 5px" }}
+                  >
+                    {atosValidadosCheck}
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="w-100 d-flex flex-column align-items-end">
-              <button className="mt-3" onClick={handleValidar}>
-                Salvar
-              </button>
-            </div>
-          </div>
-          <hr />
-          <div className="p-3">
-            <div className="card border-primary">
-              <div className="card-header text-bg-primary">
-                <i className="bi bi-caret-down-fill"></i>
-                <b>ATOS VALIDADOS</b>
-              </div>
-              <div
-                className="card-body text-bg-dark"
-                style={{ borderRadius: "0 0 5px 5px" }}
-              >
-                {atosValidadosCheck}
-              </div>
-            </div>
-          </div>
+            </>
+          )}
         </>
       ) : (
         <div className="d-flex justify-content-center">
