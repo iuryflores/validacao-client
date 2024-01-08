@@ -68,7 +68,7 @@ const Inimigo = ({ adicionarPonto }) => {
                   </span>
                   <span>
                     <small>
-                      Último ato: <strong>{matricula.qtdatos}</strong>
+                      Último ato: <strong>{matricula.qtdAtos}</strong>
                     </small>
                   </span>
                 </div>

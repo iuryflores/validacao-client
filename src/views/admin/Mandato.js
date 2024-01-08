@@ -8,7 +8,22 @@ const Mandato = ({ loadingGif }) => {
   const redefinirAtos = async () => {
     try {
       setLoading(true);
-      const res = await api.addValidadoCampo();
+      const res = await api.addValidadoCampoAtos();
+      if (res) {
+        console.log(res);
+        setMessage(res.msg);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error(error);
+      setMessage(error.msg);
+    }
+  };
+  const redefinirMatriculas = async () => {
+    try {
+      setLoading(true);
+      setMessage("Atualizando matrículas...");
+      const res = await api.addValidadoCampoMatriculas();
       if (res) {
         console.log(res);
         setMessage(res.msg);
@@ -36,7 +51,10 @@ const Mandato = ({ loadingGif }) => {
         >
           <i className="bi bi-gear-wide-connected"></i>Redefinir atos
         </div>
-        <div className="grid-item p-2 border btn btn-secondary d-flex flex-column">
+        <div
+          className="grid-item p-2 border btn btn-secondary d-flex flex-column"
+          onClick={redefinirMatriculas}
+        >
           <i className="bi bi-gear-wide-connected"></i>Redefinir matrículas
         </div>
       </div>

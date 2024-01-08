@@ -65,7 +65,7 @@ const Navbar = ({
           </li>
           <li className={`nav-item ${isLinkActive("/users/minha-caixa/")}`}>
             <Link className="nav-link" to="/users/minha-caixa/">
-              Minhas matriculas
+              Minha matricula
             </Link>
           </li>
           <li className={`nav-item ${isLinkActive("/users/meu-perfil/")}`}>
@@ -73,7 +73,7 @@ const Navbar = ({
               Meu perfil
             </Link>
           </li>
-          <li className={`nav-item ${isLinkActive("/users/minha-casa/")}`}>
+          {/*} <li className={`nav-item ${isLinkActive("/users/minha-casa/")}`}>
             <Link className="nav-link" to="/users/minha-casa/">
               Minha casa
             </Link>
@@ -82,7 +82,7 @@ const Navbar = ({
             <Link className="nav-link" to="/users/ranking/">
               Ranking
             </Link>
-          </li>
+          </li>*/}
           <li className={`nav-item ${isLinkActive("/admin/login/")}`}>
             <Link className="nav-link" onClick={onLogout} to="/login/">
               Sair

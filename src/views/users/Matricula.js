@@ -65,14 +65,14 @@ const Matricula = ({
       <input
         className="btn-check"
         type="checkbox"
-        id={`ato${ato.codigo}`}
+        id={`ato${ato.ato}`}
         autoComplete="off"
-        value={`${ato.codigo}`}
-        checked={selectedAtos.includes(`${ato.codigo}`)}
+        value={`${ato.ato}`}
+        checked={selectedAtos.includes(`${ato.ato}`)}
         onChange={handleCheckboxChange}
       />
-      <label htmlFor={`ato${ato.codigo}`} className="btn btn-outline-warning">
-        {ato.codigo}
+      <label htmlFor={`ato${ato.ato}`} className="btn btn-outline-warning">
+        {ato.ato}
       </label>
     </div>
   ));
@@ -87,15 +87,15 @@ const Matricula = ({
       <input
         className="btn-check"
         type="checkbox"
-        id={`ato${ato.codigo}`}
+        id={`ato${ato.ato}`}
         autoComplete="off"
-        value={`ato${ato.codigo}`}
+        value={`ato${ato.ato}`}
         checked
         onChange={handleCheckboxChange}
         disabled
       />
-      <label htmlFor={`ato${ato.codigo}`} className="btn btn-outline-success">
-        {ato.codigo}
+      <label htmlFor={`ato${ato.ato}`} className="btn btn-outline-success">
+        {ato.ato}
       </label>
     </div>
   ));
