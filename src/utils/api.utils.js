@@ -46,7 +46,7 @@ class Api {
   };
   signup = async (signupInfo) => {
     try {
-      const { data } = await this.api.post("/user/auth/signup", signupInfo);
+      const { data } = await this.api.post("/auth/signup", signupInfo);
       return data;
     } catch (error) {
       throw error.response.data.msg;
@@ -164,9 +164,17 @@ class Api {
       throw error.response.data.msg;
     }
   };
-  addValidadoCampo = async () => {
+  addValidadoCampoAtos = async () => {
     try {
       const { data } = await this.api.put(`/admin/atualizar/atos/`);
+      return data;
+    } catch (error) {
+      throw error.response.data.msg;
+    }
+  };
+  addValidadoCampoMatriculas = async () => {
+    try {
+      const { data } = await this.api.put(`/matriculas/check/validar-todas/`);
       return data;
     } catch (error) {
       throw error.response.data.msg;
